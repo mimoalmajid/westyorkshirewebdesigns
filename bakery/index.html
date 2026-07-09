@@ -1,0 +1,1317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Village Bakery | The Heart of Bramhope</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0A0A0A;
+            --white: #FFFFFF;
+            --cream: #F5E6D0;
+            --gold: #C4956A;
+            --warm: #D4A574;
+            --dark-gold: #8B6914;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--white);
+            overflow-x: hidden;
+            line-height: 1.7;
+        }
+
+        ::selection {
+            background: var(--gold);
+            color: var(--bg);
+        }
+
+        /* ===== SCROLLBAR ===== */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--gold);
+            border-radius: 4px;
+        }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.4; }
+            50% { transform: translateY(-30px) rotate(10deg); opacity: 0.8; }
+        }
+
+        @keyframes floatReverse {
+            0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.3; }
+            50% { transform: translateY(25px) rotate(-10deg); opacity: 0.7; }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -200% center; }
+            100% { background-position: 200% center; }
+        }
+
+        @keyframes heartBeat {
+            0%, 100% { transform: scale(1); }
+            14% { transform: scale(1.15); }
+            28% { transform: scale(1); }
+            42% { transform: scale(1.15); }
+            70% { transform: scale(1); }
+        }
+
+        @keyframes laurelSway {
+            0%, 100% { transform: rotate(-2deg); }
+            50% { transform: rotate(2deg); }
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 0; transform: scale(0); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .fade-in-delay-1 { transition-delay: 0.15s; }
+        .fade-in-delay-2 { transition-delay: 0.3s; }
+        .fade-in-delay-3 { transition-delay: 0.45s; }
+        .fade-in-delay-4 { transition-delay: 0.6s; }
+        .fade-in-delay-5 { transition-delay: 0.75s; }
+
+        /* ===== FLOATING HEARTS ===== */
+        /* ===== NAVIGATION ===== */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.4s ease;
+        }
+
+        nav.scrolled {
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 12px 50px;
+            border-bottom: 1px solid rgba(196, 149, 106, 0.2);
+        }
+
+        .nav-logo {
+            font-family: 'Great Vibes', cursive;
+            font-size: 1.8rem;
+            color: var(--cream);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .nav-logo .heart-a {
+            color: var(--gold);
+            display: inline-block;
+            animation: heartBeat 2s ease-in-out infinite;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 35px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--cream);
+            text-decoration: none;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 400;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 50%;
+            width: 0;
+            height: 1px;
+            background: var(--gold);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--cream);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            background: linear-gradient(180deg, rgba(10,10,10,0.3) 0%, rgba(10,10,10,0.7) 50%, var(--bg) 100%),
+                        url('images/hero-bg.jpg') center/cover no-repeat;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            animation: fadeInUp 1.2s ease-out;
+        }
+
+        .hero-laurel {
+            width: 200px;
+            height: auto;
+            margin-bottom: 10px;
+            opacity: 0.6;
+            animation: laurelSway 4s ease-in-out infinite;
+        }
+
+        .hero-title {
+            font-family: 'Great Vibes', cursive;
+            font-size: clamp(3rem, 8vw, 6rem);
+            color: var(--cream);
+            line-height: 1.1;
+            margin-bottom: 10px;
+            text-shadow: 0 4px 30px rgba(0,0,0,0.5);
+        }
+
+        .hero-title .heart-a {
+            color: var(--gold);
+            display: inline-block;
+            animation: heartBeat 2s ease-in-out infinite;
+        }
+
+        .hero-tagline {
+            font-family: 'Great Vibes', cursive;
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            color: var(--gold);
+            margin-bottom: 25px;
+            letter-spacing: 3px;
+        }
+
+        .hero-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .hero-divider .line {
+            width: 80px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+
+        .hero-divider .heart-icon {
+            color: var(--gold);
+            font-size: 1.2rem;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            border: 1px solid rgba(196, 149, 106, 0.4);
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--cream);
+            background: rgba(10, 10, 10, 0.5);
+            backdrop-filter: blur(10px);
+        }
+
+        .hero-badge .heart-icon {
+            color: var(--gold);
+            animation: heartBeat 2s ease-in-out infinite;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            color: var(--gold);
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            opacity: 0.7;
+            animation: fadeIn 2s ease-out 1s both;
+        }
+
+        .scroll-indicator .mouse {
+            width: 24px;
+            height: 38px;
+            border: 1px solid var(--gold);
+            border-radius: 12px;
+            position: relative;
+        }
+
+        .scroll-indicator .mouse::after {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 3px;
+            height: 6px;
+            background: var(--gold);
+            border-radius: 2px;
+            animation: float 1.5s ease-in-out infinite;
+        }
+
+        /* ===== SECTION STYLES ===== */
+        section {
+            padding: 100px 50px;
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            font-family: 'Great Vibes', cursive;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            color: var(--cream);
+            margin-bottom: 15px;
+        }
+
+        .section-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .section-divider .line {
+            width: 60px;
+            height: 1px;
+            background: var(--gold);
+            opacity: 0.5;
+        }
+
+        .section-divider .heart-icon {
+            color: var(--gold);
+            font-size: 1rem;
+        }
+
+        .section-header p {
+            color: rgba(245, 230, 208, 0.7);
+            font-size: 1rem;
+            max-width: 500px;
+            margin: 0 auto;
+            font-weight: 300;
+        }
+
+        /* ===== ABOUT SECTION ===== */
+        .about {
+            background: var(--bg);
+        }
+
+        .about-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-image {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.6s ease;
+        }
+
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .about-image::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: 10px;
+            bottom: 10px;
+            border: 1px solid var(--gold);
+            border-radius: 8px;
+            z-index: -1;
+            opacity: 0.4;
+        }
+
+        .about-text h3 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2rem;
+            color: var(--gold);
+            margin-bottom: 20px;
+        }
+
+        .about-text p {
+            color: rgba(245, 230, 208, 0.8);
+            margin-bottom: 20px;
+            font-weight: 300;
+            font-size: 1rem;
+        }
+
+        .about-features {
+            list-style: none;
+            margin-top: 25px;
+        }
+
+        .about-features li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+            color: rgba(245, 230, 208, 0.85);
+            font-weight: 300;
+        }
+
+        .about-features li .heart-bullet {
+            color: var(--gold);
+            font-size: 0.8rem;
+            animation: heartBeat 2s ease-in-out infinite;
+        }
+
+        /* ===== PRODUCTS SECTION ===== */
+        .products {
+            background: linear-gradient(180deg, var(--bg) 0%, #0D0D0D 50%, var(--bg) 100%);
+        }
+
+        .products-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .product-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(196, 149, 106, 0.15);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(196, 149, 106, 0.4);
+            box-shadow: 0 20px 60px rgba(196, 149, 106, 0.1);
+        }
+
+        .product-card:hover::before {
+            opacity: 1;
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .product-card:hover img {
+            transform: scale(1.08);
+        }
+
+        .product-info {
+            padding: 25px;
+            text-align: center;
+        }
+
+        .product-info h3 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 1.8rem;
+            color: var(--cream);
+            margin-bottom: 8px;
+        }
+
+        .product-info p {
+            color: rgba(245, 230, 208, 0.6);
+            font-size: 0.9rem;
+            font-weight: 300;
+        }
+
+        .product-heart {
+            display: inline-block;
+            margin-top: 12px;
+            color: var(--gold);
+            font-size: 1.2rem;
+            opacity: 0.5;
+            transition: all 0.3s ease;
+        }
+
+        .product-card:hover .product-heart {
+            opacity: 1;
+            animation: heartBeat 1s ease-in-out;
+        }
+
+        /* ===== GALLERY SECTION ===== */
+        .gallery {
+            background: var(--bg);
+        }
+
+        .gallery-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(2, 250px);
+            gap: 8px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .gallery-item:nth-child(1) {
+            grid-column: span 2;
+            grid-row: span 2;
+        }
+
+        .gallery-item:nth-child(4) {
+            grid-column: span 2;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.6s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(10, 10, 10, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-overlay .heart-icon {
+            color: var(--gold);
+            font-size: 2rem;
+            animation: heartBeat 1s ease-in-out infinite;
+        }
+
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 10, 10, 0.95);
+            z-index: 10000;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox img {
+            max-width: 85%;
+            max-height: 80vh;
+            object-fit: contain;
+            border-radius: 8px;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            background: none;
+            border: none;
+            color: var(--cream);
+            font-size: 2.5rem;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .lightbox-close:hover {
+            color: var(--gold);
+        }
+
+        /* ===== VISIT SECTION ===== */
+        .visit {
+            background: linear-gradient(180deg, var(--bg) 0%, #0D0D0D 100%);
+        }
+
+        .visit-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: start;
+        }
+
+        .visit-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(196, 149, 106, 0.15);
+            border-radius: 12px;
+            padding: 40px;
+            text-align: center;
+            transition: all 0.4s ease;
+        }
+
+        .visit-card:hover {
+            border-color: rgba(196, 149, 106, 0.4);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(196, 149, 106, 0.08);
+        }
+
+        .visit-card .card-icon {
+            font-size: 2.5rem;
+            color: var(--gold);
+            margin-bottom: 20px;
+            display: inline-block;
+            animation: heartBeat 2s ease-in-out infinite;
+        }
+
+        .visit-card h3 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2rem;
+            color: var(--cream);
+            margin-bottom: 20px;
+        }
+
+        .visit-card p, .visit-card address {
+            color: rgba(245, 230, 208, 0.75);
+            font-style: normal;
+            font-weight: 300;
+            line-height: 2;
+        }
+
+        .visit-card a {
+            color: var(--gold);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .visit-card a:hover {
+            color: var(--warm);
+        }
+
+        .hours-list {
+            list-style: none;
+            text-align: left;
+            margin-top: 15px;
+        }
+
+        .hours-list li {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(196, 149, 106, 0.1);
+            color: rgba(245, 230, 208, 0.75);
+            font-weight: 300;
+            font-size: 0.9rem;
+        }
+
+        .hours-list li:last-child {
+            border-bottom: none;
+        }
+
+        .hours-list .day {
+            color: var(--cream);
+        }
+
+        .hours-list .heart-bullet {
+            color: var(--gold);
+            margin-right: 8px;
+            font-size: 0.7rem;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: #070707;
+            padding: 60px 50px 30px;
+            text-align: center;
+            border-top: 1px solid rgba(196, 149, 106, 0.15);
+        }
+
+        .footer-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .footer-logo {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.5rem;
+            color: var(--cream);
+            margin-bottom: 10px;
+        }
+
+        .footer-logo .heart-a {
+            color: var(--gold);
+            display: inline-block;
+            animation: heartBeat 2s ease-in-out infinite;
+        }
+
+        .footer-tagline {
+            color: var(--gold);
+            font-size: 1rem;
+            letter-spacing: 3px;
+            margin-bottom: 25px;
+            font-family: 'Great Vibes', cursive;
+        }
+
+        .footer-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+
+        .footer-divider .line {
+            width: 50px;
+            height: 1px;
+            background: var(--gold);
+            opacity: 0.3;
+        }
+
+        .footer-divider .heart-icon {
+            color: var(--gold);
+            font-size: 0.8rem;
+        }
+
+        .footer-address {
+            color: rgba(245, 230, 208, 0.5);
+            font-size: 0.85rem;
+            font-weight: 300;
+            margin-bottom: 10px;
+        }
+
+        .footer-phone {
+            color: var(--gold);
+            text-decoration: none;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-phone:hover {
+            color: var(--warm);
+        }
+
+        .footer-hearts {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .footer-hearts span {
+            color: var(--gold);
+            opacity: 0.4;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .footer-hearts span:nth-child(2) {
+            animation-delay: 0.5s;
+            animation-name: floatReverse;
+        }
+
+        .footer-hearts span:nth-child(3) {
+            animation-delay: 1s;
+        }
+
+        .footer-credit {
+            color: rgba(245, 230, 208, 0.3);
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            margin-top: 20px;
+            font-weight: 300;
+        }
+
+        .footer-credit a {
+            color: rgba(196, 149, 106, 0.5);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-credit a:hover {
+            color: var(--gold);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 15px 25px;
+            }
+            nav.scrolled {
+                padding: 12px 25px;
+            }
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(10, 10, 10, 0.98);
+                flex-direction: column;
+                padding: 20px;
+                gap: 20px;
+                border-bottom: 1px solid rgba(196, 149, 106, 0.2);
+            }
+            .nav-links.active {
+                display: flex;
+            }
+            .mobile-menu-btn {
+                display: block;
+            }
+            section {
+                padding: 60px 25px;
+            }
+            .about-container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            .about-image img {
+                height: 350px;
+            }
+            .products-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+            .product-card img {
+                height: 240px;
+            }
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: repeat(3, 180px);
+            }
+            .gallery-item:nth-child(1) {
+                grid-column: span 2;
+                grid-row: span 1;
+            }
+            .gallery-item:nth-child(4) {
+                grid-column: span 1;
+            }
+            .visit-container {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            .gallery-grid {
+                grid-template-columns: 1fr;
+                grid-template-rows: repeat(6, 200px);
+            }
+            .gallery-item:nth-child(1) {
+                grid-column: span 1;
+                grid-row: span 1;
+            }
+            .visit-card {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <a href="#" class="nav-logo">The Vill<span class="heart-a">&#10084;</span>ge Bakery</a>
+        <button class="mobile-menu-btn" onclick="toggleMenu()">&#9776;</button>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">Our Story</a></li>
+            <li><a href="#products">Products</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#visit">Visit Us</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <!-- Laurel SVG -->
+            <svg class="hero-laurel" viewBox="0 0 200 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M100 30 C100 30 80 10 60 15 C40 20 30 5 30 5" stroke="#C4956A" stroke-width="1" fill="none" opacity="0.6"/>
+                <path d="M100 30 C100 30 120 10 140 15 C160 20 170 5 170 5" stroke="#C4956A" stroke-width="1" fill="none" opacity="0.6"/>
+                <path d="M100 30 C100 30 75 25 55 30 C35 35 20 25 20 25" stroke="#C4956A" stroke-width="1" fill="none" opacity="0.5"/>
+                <path d="M100 30 C100 30 125 25 145 30 C165 35 180 25 180 25" stroke="#C4956A" stroke-width="1" fill="none" opacity="0.5"/>
+                <ellipse cx="100" cy="30" rx="4" ry="6" fill="#C4956A" opacity="0.8"/>
+                <ellipse cx="60" cy="18" rx="3" ry="5" fill="#C4956A" opacity="0.4" transform="rotate(-20 60 18)"/>
+                <ellipse cx="140" cy="18" rx="3" ry="5" fill="#C4956A" opacity="0.4" transform="rotate(20 140 18)"/>
+                <ellipse cx="40" cy="28" rx="2.5" ry="4" fill="#C4956A" opacity="0.3" transform="rotate(-30 40 28)"/>
+                <ellipse cx="160" cy="28" rx="2.5" ry="4" fill="#C4956A" opacity="0.3" transform="rotate(30 160 28)"/>
+            </svg>
+
+            <h1 class="hero-title">The Vill<span class="heart-a">&#10084;</span>ge Bakery</h1>
+            <p class="hero-tagline">The Heart of Bramhope</p>
+
+            <div class="hero-divider">
+                <span class="line"></span>
+                <span class="heart-icon">&#10084;</span>
+                <span class="line"></span>
+            </div>
+
+            <div class="hero-badge">
+                <span class="heart-icon">&#10084;</span>
+                <span>Established over 80 years</span>
+                <span class="heart-icon">&#10084;</span>
+            </div>
+        </div>
+
+        <div class="scroll-indicator">
+            <span>Scroll</span>
+            <div class="mouse"></div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="section-header fade-in">
+            <div class="section-divider">
+                <span class="line"></span>
+                <span class="heart-icon">&#10084;</span>
+                <span class="line"></span>
+            </div>
+            <h2>Our Story</h2>
+            <p>Baking with love for over eight decades</p>
+        </div>
+
+        <div class="about-container">
+            <div class="about-image fade-in">
+                <img src="images/interior.jpg" alt="The Village Bakery Interior">
+            </div>
+            <div class="about-text fade-in fade-in-delay-2">
+                <h3>A Legacy of Love &amp; Baking</h3>
+                <p>
+                    For over 80 years, The Village Bakery has stood at the heart of Bramhope, 
+                    filling the air with the irresistible aroma of freshly baked bread and pastries. 
+                    What began as a small family venture has blossomed into a beloved community institution, 
+                    where every loaf is crafted with care and every cake is made with love.
+                </p>
+                <p>
+                    Our dedicated bakers rise before dawn, kneading dough and preparing fillings 
+                    using time-honoured recipes passed down through generations. From crusty artisan 
+                    loaves to delicate afternoon treats, each creation tells a story of tradition, 
+                    quality, and the warm spirit of our village.
+                </p>
+                <ul class="about-features">
+                    <li><span class="heart-bullet">&#10084;</span> Freshly baked every morning</li>
+                    <li><span class="heart-bullet">&#10084;</span> Traditional recipes &amp; techniques</li>
+                    <li><span class="heart-bullet">&#10084;</span> Locally sourced ingredients</li>
+                    <li><span class="heart-bullet">&#10084;</span> Family-run with love</li>
+                    <li><span class="heart-bullet">&#10084;</span> Proudly serving Bramhope</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products" id="products">
+        <div class="section-header fade-in">
+            <div class="section-divider">
+                <span class="line"></span>
+                <span class="heart-icon">&#10084;</span>
+                <span class="line"></span>
+            </div>
+            <h2>Our Products</h2>
+            <p>Handcrafted with passion, baked to perfection</p>
+        </div>
+
+        <div class="products-grid">
+            <div class="product-card fade-in fade-in-delay-1">
+                <img src="images/bread.jpg" alt="Fresh Breads">
+                <div class="product-info">
+                    <h3>Fresh Breads</h3>
+                    <p>Artisan loaves, baguettes, and rolls baked daily with traditional methods</p>
+                    <span class="product-heart">&#10084;</span>
+                </div>
+            </div>
+
+            <div class="product-card fade-in fade-in-delay-2">
+                <img src="images/cakes.jpg" alt="Cakes &amp; Pastries">
+                <div class="product-info">
+                    <h3>Cakes &amp; Pastries</h3>
+                    <p>Beautiful celebration cakes, cupcakes, and delicate patisserie creations</p>
+                    <span class="product-heart">&#10084;</span>
+                </div>
+            </div>
+
+            <div class="product-card fade-in fade-in-delay-3">
+                <img src="images/pies.jpg" alt="Pies &amp; Savouries">
+                <div class="product-info">
+                    <h3>Pies &amp; Savouries</h3>
+                    <p>Golden flaky pastry filled with savoury meats and sweet fruits</p>
+                    <span class="product-heart">&#10084;</span>
+                </div>
+            </div>
+
+            <div class="product-card fade-in fade-in-delay-1">
+                <img src="images/sandwiches.jpg" alt="Sandwiches">
+                <div class="product-info">
+                    <h3>Sandwiches</h3>
+                    <p>Fresh gourmet sandwiches on our own artisan bread, made to order</p>
+                    <span class="product-heart">&#10084;</span>
+                </div>
+            </div>
+
+            <div class="product-card fade-in fade-in-delay-2">
+                <img src="images/coffee.jpg" alt="Coffee &amp; Treats">
+                <div class="product-info">
+                    <h3>Coffee &amp; Treats</h3>
+                    <p>Artisan coffee paired with fresh croissants, danishes, and sweet treats</p>
+                    <span class="product-heart">&#10084;</span>
+                </div>
+            </div>
+
+            <div class="product-card fade-in fade-in-delay-3">
+                <img src="images/hero-bg.jpg" alt="Seasonal Specials">
+                <div class="product-info">
+                    <h3>Seasonal Specials</h3>
+                    <p>Limited-edition bakes for holidays, festivals, and special occasions</p>
+                    <span class="product-heart">&#10084;</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery" id="gallery">
+        <div class="section-header fade-in">
+            <div class="section-divider">
+                <span class="line"></span>
+                <span class="heart-icon">&#10084;</span>
+                <span class="line"></span>
+            </div>
+            <h2>Our Gallery</h2>
+            <p>A glimpse into the heart of our bakery</p>
+        </div>
+
+        <div class="gallery-grid">
+            <div class="gallery-item fade-in" onclick="openLightbox('images/bread.jpg')">
+                <img src="images/bread.jpg" alt="Fresh Breads">
+                <div class="gallery-overlay">
+                    <span class="heart-icon">&#10084;</span>
+                </div>
+            </div>
+            <div class="gallery-item fade-in fade-in-delay-1" onclick="openLightbox('images/cakes.jpg')">
+                <img src="images/cakes.jpg" alt="Cakes">
+                <div class="gallery-overlay">
+                    <span class="heart-icon">&#10084;</span>
+                </div>
+            </div>
+            <div class="gallery-item fade-in fade-in-delay-2" onclick="openLightbox('images/coffee.jpg')">
+                <img src="images/coffee.jpg" alt="Coffee">
+                <div class="gallery-overlay">
+                    <span class="heart-icon">&#10084;</span>
+                </div>
+            </div>
+            <div class="gallery-item fade-in fade-in-delay-1" onclick="openLightbox('images/pies.jpg')">
+                <img src="images/pies.jpg" alt="Pies">
+                <div class="gallery-overlay">
+                    <span class="heart-icon">&#10084;</span>
+                </div>
+            </div>
+            <div class="gallery-item fade-in fade-in-delay-2" onclick="openLightbox('images/sandwiches.jpg')">
+                <img src="images/sandwiches.jpg" alt="Sandwiches">
+                <div class="gallery-overlay">
+                    <span class="heart-icon">&#10084;</span>
+                </div>
+            </div>
+            <div class="gallery-item fade-in fade-in-delay-3" onclick="openLightbox('images/interior.jpg')">
+                <img src="images/interior.jpg" alt="Interior">
+                <div class="gallery-overlay">
+                    <span class="heart-icon">&#10084;</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <button class="lightbox-close">&times;</button>
+        <img id="lightboxImg" src="" alt="Gallery Image">
+    </div>
+
+    <!-- Visit Section -->
+    <section class="visit" id="visit">
+        <div class="section-header fade-in">
+            <div class="section-divider">
+                <span class="line"></span>
+                <span class="heart-icon">&#10084;</span>
+                <span class="line"></span>
+            </div>
+            <h2>Visit Us</h2>
+            <p>We'd love to welcome you to the bakery</p>
+        </div>
+
+        <div class="visit-container">
+            <div class="visit-card fade-in fade-in-delay-1">
+                <span class="card-icon">&#10084;</span>
+                <h3>Find Us</h3>
+                <address>
+                    9-10 The Cross<br>
+                    Bramhope<br>
+                    Leeds LS16 9AX
+                </address>
+                <p style="margin-top: 15px;">
+                    <a href="tel:01132843278">0113 284 3278</a>
+                </p>
+            </div>
+
+            <div class="visit-card fade-in fade-in-delay-2">
+                <span class="card-icon">&#10084;</span>
+                <h3>Opening Hours</h3>
+                <ul class="hours-list">
+                    <li><span><span class="heart-bullet">&#10084;</span><span class="day">Monday</span></span> <span>7:00 AM - 4:00 PM</span></li>
+                    <li><span><span class="heart-bullet">&#10084;</span><span class="day">Tuesday</span></span> <span>7:00 AM - 4:00 PM</span></li>
+                    <li><span><span class="heart-bullet">&#10084;</span><span class="day">Wednesday</span></span> <span>7:00 AM - 4:00 PM</span></li>
+                    <li><span><span class="heart-bullet">&#10084;</span><span class="day">Thursday</span></span> <span>7:00 AM - 4:00 PM</span></li>
+                    <li><span><span class="heart-bullet">&#10084;</span><span class="day">Friday</span></span> <span>7:00 AM - 4:00 PM</span></li>
+                    <li><span><span class="heart-bullet">&#10084;</span><span class="day">Saturday</span></span> <span>7:00 AM - 4:00 PM</span></li>
+                    <li><span><span class="heart-bullet">&#10084;</span><span class="day">Sunday</span></span> <span>8:00 AM - 2:00 PM</span></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">The Vill<span class="heart-a">&#10084;</span>ge Bakery</div>
+            <p class="footer-tagline">The Heart of Bramhope</p>
+
+            <div class="footer-divider">
+                <span class="line"></span>
+                <span class="heart-icon">&#10084;</span>
+                <span class="line"></span>
+            </div>
+
+            <p class="footer-address">9-10 The Cross, Bramhope, Leeds LS16 9AX</p>
+            <a href="tel:01132843278" class="footer-phone">0113 284 3278</a>
+
+            <div class="footer-hearts">
+                <span>&#10084;</span>
+                <span>&#10084;</span>
+                <span>&#10084;</span>
+            </div>
+
+            <p class="footer-credit">
+                Website by <a href="#">West Yorkshire Web Designs</a> &nbsp;|&nbsp; Made with <span style="color: #C4956A;">&#10084;</span> for The Village Bakery
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scroll effect
+        function handleScroll() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        }
+
+        // Mobile menu toggle
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+
+        // Close mobile menu on link click
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('navLinks').classList.remove('active');
+            });
+        });
+
+        // Fade in on scroll
+        function handleFadeIn() {
+            const elements = document.querySelectorAll('.fade-in');
+            elements.forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight - 80) {
+                    el.classList.add('visible');
+                }
+            });
+        }
+
+        // Lightbox functions
+        function openLightbox(src) {
+            document.getElementById('lightboxImg').src = src;
+            document.getElementById('lightbox').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Keyboard support for lightbox
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeLightbox();
+            }
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href !== '#') {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }
+            });
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            handleFadeIn();
+        });
+
+        window.addEventListener('scroll', () => {
+            handleScroll();
+            handleFadeIn();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>West Yorkshire Web Designs - Bramhope Business Websites</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0f0f0f;
+      --card: #1a1a1a;
+      --text: #f5e6d0;
+      --accent: #c4956a;
+      --muted: #8b7d73;
+      --border: #2a2a2a;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+    .hero {
+      text-align: center;
+      padding: 80px 20px 60px;
+      background: linear-gradient(180deg, #1a1410 0%, var(--bg) 100%);
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      margin-bottom: 12px;
+    }
+    .hero p {
+      color: var(--muted);
+      font-size: 1.1rem;
+      max-width: 500px;
+      margin: 0 auto 8px;
+    }
+    .hero .subtitle {
+      color: var(--accent);
+      font-size: 0.9rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 24px;
+      padding: 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+      border-color: var(--accent);
+    }
+    .card-img {
+      height: 200px;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+    .card-img::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 60%;
+      background: linear-gradient(transparent, var(--card));
+    }
+    .card-body {
+      padding: 24px;
+    }
+    .card-body h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      margin-bottom: 6px;
+    }
+    .card-body p {
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+    .tag {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      margin-top: 12px;
+      letter-spacing: 0.5px;
+    }
+    .tag-deli { background: #3d2e20; color: #c4956a; }
+    .tag-bakery { background: #2a2a2a; color: #f5e6d0; }
+    .tag-barber { background: #1a1a1a; color: #c9a84c; border: 1px solid #333; }
+    .tag-salon { background: #faf7f4; color: #b8837a; }
+    .tag-browns { background: #fdf8f5; color: #c9a48e; }
+    .tag-bare { background: #f7f5f0; color: #4a7c59; }
+    .footer {
+      text-align: center;
+      padding: 40px;
+      color: var(--muted);
+      font-size: 0.85rem;
+      border-top: 1px solid var(--border);
+      margin-top: 40px;
+    }
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 2rem; }
+      .grid { grid-template-columns: 1fr; padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="hero">
+    <h1>West Yorkshire Web Designs</h1>
+    <p class="subtitle">Website Previews for Bramhope Businesses</p>
+    <p>Beautiful, professional websites designed to help local businesses thrive online.</p>
+  </div>
+
+  <div class="grid">
+    <a href="./deli/index.html" class="card">
+      <div class="card-img" style="background-image:url('./deli/images/hero.jpg')"></div>
+      <div class="card-body">
+        <h3>Bramhope Deli</h3>
+        <p>Dark rustic coffee shop theme with food gallery and artisan menu showcase.</p>
+        <span class="tag tag-deli">Coffee Shop</span>
+      </div>
+    </a>
+
+    <a href="./bakery/index.html" class="card">
+      <div class="card-img" style="background-image:url('./bakery/images/hero-bg.jpg')"></div>
+      <div class="card-body">
+        <h3>Village Bakery</h3>
+        <p>Classic black-and-white elegance with heart motifs and 80-year heritage.</p>
+        <span class="tag tag-bakery">Bakery</span>
+      </div>
+    </a>
+
+    <a href="./lacave/index.html" class="card">
+      <div class="card-img" style="background-image:url('./lacave/images/hero.jpg')"></div>
+      <div class="card-body">
+        <h3>LA Cave Turkish Barber</h3>
+        <p>Premium dark barbershop with gold accents, gallery placeholders, and booking.</p>
+        <span class="tag tag-barber">Barbershop</span>
+      </div>
+    </a>
+
+    <a href="./goodale/index.html" class="card">
+      <div class="card-img" style="background-image:url('./goodale/images/hero.jpg')"></div>
+      <div class="card-body">
+        <h3>Richard Goodale Hairdresser</h3>
+        <p>Elegant warm salon design with rose accents and team showcase.</p>
+        <span class="tag tag-salon">Hair Salon</span>
+      </div>
+    </a>
+
+    <a href="./browns/index.html" class="card">
+      <div class="card-img" style="background-image:url('./browns/images/hero.jpg')"></div>
+      <div class="card-body">
+        <h3>Browns of Bramhope</h3>
+        <p>Luxurious hair and beauty salon with services, products, and gallery.</p>
+        <span class="tag tag-browns">Hair & Beauty</span>
+      </div>
+    </a>
+
+    <a href="./bare/index.html" class="card">
+      <div class="card-img" style="background-image:url('./bare/images/hero.jpg')"></div>
+      <div class="card-body">
+        <h3>Bare Coffee</h3>
+        <p>Fresh green upbeat cafe with 4.9 rating badge and cyclist-friendly features.</p>
+        <span class="tag tag-bare">Coffee Shop</span>
+      </div>
+    </a>
+  </div>
+
+  <div class="footer">
+    <p>Website previews created by West Yorkshire Web Designs</p>
+    <p style="margin-top:8px; font-size:0.75rem;">All business information sourced from public listings. Images are AI-generated for preview purposes.</p>
+  </div>
+</body>
+</html>

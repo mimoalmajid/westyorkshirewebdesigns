@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LA Cave Turkish Barber | Leeds</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ===== RESET & BASE ===== */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:#0F0F0F;color:#FFFFFF;line-height:1.6;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+img{max-width:100%;display:block}
+ul{list-style:none}
+
+/* ===== VARIABLES ===== */
+:root{
+  --bg:#0F0F0F;
+  --card:#1A1A1A;
+  --border:#2A2A2A;
+  --gold:#C9A84C;
+  --gold-light:#E2C875;
+  --white:#FFFFFF;
+  --gray:#888888;
+  --gray-dark:#555555;
+}
+
+/* ===== SCROLLBAR ===== */
+::-webkit-scrollbar{width:8px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--gold);border-radius:0}
+
+/* ===== NAVIGATION ===== */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:1.2rem 5%;display:flex;justify-content:space-between;align-items:center;transition:all .3s ease;background:transparent}
+nav.scrolled{background:rgba(15,15,15,.95);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
+.logo{font-family:'Oswald',sans-serif;font-size:1.8rem;font-weight:700;letter-spacing:3px;color:var(--white)}
+.logo span{color:var(--gold)}
+.nav-links{display:flex;gap:2.5rem;align-items:center}
+.nav-links a{font-family:'Inter',sans-serif;font-size:.85rem;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;transition:color .3s;color:var(--white);position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:var(--gold);transition:width .3s}
+.nav-links a:hover::after{width:100%}
+.nav-links a:hover{color:var(--gold)}
+.nav-cta{background:var(--gold);color:var(--bg)!important;padding:.6rem 1.5rem;font-weight:600!important;transition:all .3s}
+.nav-cta:hover{background:var(--gold-light);transform:translateY(-2px)}
+.nav-cta::after{display:none!important}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;z-index:1001}
+.hamburger span{display:block;width:28px;height:2px;background:var(--gold);transition:all .3s}
+.hamburger.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+.hamburger.active span:nth-child(2){opacity:0}
+.hamburger.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+
+/* ===== HERO ===== */
+.hero{position:relative;height:100vh;min-height:700px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:url('images/hero.jpg') center/cover no-repeat;z-index:1}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,15,15,.7) 0%,rgba(15,15,15,.85) 100%);z-index:2}
+.hero-content{position:relative;z-index:3;text-align:center;padding:0 5%;max-width:900px}
+.hero-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(201,168,76,.15);border:1px solid var(--gold);padding:.5rem 1.2rem;margin-bottom:2rem;font-size:.85rem;letter-spacing:2px;text-transform:uppercase}
+.hero-badge .stars{color:var(--gold);font-size:1rem}
+.hero-title{font-family:'Oswald',sans-serif;font-size:clamp(3.5rem,10vw,7rem);font-weight:700;letter-spacing:12px;line-height:1;margin-bottom:1rem;text-transform:uppercase}
+.hero-title span{display:block;color:var(--gold);font-size:clamp(1.2rem,3vw,2rem);letter-spacing:8px;font-weight:400;margin-top:.5rem}
+.hero-divider{width:80px;height:2px;background:var(--gold);margin:1.5rem auto}
+.hero-subtitle{font-size:1.1rem;color:var(--gray);letter-spacing:3px;text-transform:uppercase;margin-bottom:2.5rem;font-weight:300}
+.hero-cta{display:inline-flex;align-items:center;gap:.8rem;background:var(--gold);color:var(--bg);padding:1rem 2.5rem;font-family:'Oswald',sans-serif;font-size:1rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;transition:all .3s;border:none;cursor:pointer}
+.hero-cta:hover{background:var(--gold-light);transform:translateY(-3px);box-shadow:0 10px 40px rgba(201,168,76,.3)}
+.hero-scroll{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);z-index:3;display:flex;flex-direction:column;align-items:center;gap:.5rem;animation:bounce 2s infinite}
+.hero-scroll span{font-size:.7rem;letter-spacing:3px;text-transform:uppercase;color:var(--gray)}
+.hero-scroll .line{width:1px;height:40px;background:linear-gradient(180deg,var(--gold),transparent)}
+@keyframes bounce{0%,20%,50%,80%,100%{transform:translateX(-50%) translateY(0)}40%{transform:translateX(-50%) translateY(-10px)}60%{transform:translateX(-50%) translateY(-5px)}}
+
+/* ===== SECTION BASE ===== */
+section{padding:6rem 5%;position:relative}
+.section-header{text-align:center;margin-bottom:4rem}
+.section-label{font-family:'Inter',sans-serif;font-size:.8rem;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:1rem}
+.section-title{font-family:'Oswald',sans-serif;font-size:clamp(2rem,4vw,3rem);font-weight:700;letter-spacing:3px;text-transform:uppercase}
+.section-divider{width:60px;height:2px;background:var(--gold);margin:1.5rem auto}
+.section-subtitle{color:var(--gray);max-width:600px;margin:0 auto;font-size:1rem}
+
+/* ===== ABOUT ===== */
+.about{background:var(--bg)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;max-width:1200px;margin:0 auto}
+.about-images{position:relative}
+.about-img-main{border-radius:0;overflow:hidden;border:1px solid var(--border)}
+.about-img-main img{width:100%;height:450px;object-fit:cover}
+.about-img-small{position:absolute;bottom:-30px;right:-30px;border:3px solid var(--bg);overflow:hidden;border-radius:0}
+.about-img-small img{width:200px;height:250px;object-fit:cover}
+.about-content{padding:2rem 0}
+.about-content h3{font-family:'Oswald',sans-serif;font-size:1.8rem;font-weight:600;margin-bottom:1.5rem;letter-spacing:2px;text-transform:uppercase}
+.about-content p{color:var(--gray);margin-bottom:1.5rem;font-size:1rem;line-height:1.8}
+.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin:2rem 0}
+.stat-item{text-align:center;padding:1.5rem;background:var(--card);border:1px solid var(--border);transition:all .3s}
+.stat-item:hover{border-color:var(--gold)}
+.stat-number{font-family:'Oswald',sans-serif;font-size:2.2rem;font-weight:700;color:var(--gold);line-height:1}
+.stat-label{font-size:.75rem;color:var(--gray);text-transform:uppercase;letter-spacing:1.5px;margin-top:.3rem}
+.amenities{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:2rem}
+.amenity{display:flex;align-items:center;gap:.6rem;font-size:.85rem;color:var(--gray)}
+.amenity svg{width:18px;height:18px;color:var(--gold);flex-shrink:0}
+
+/* ===== SERVICES ===== */
+.services{background:#0A0A0A}
+.services-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.5rem;max-width:1200px;margin:0 auto}
+.service-card{background:var(--card);border:1px solid var(--border);padding:2rem;transition:all .3s;position:relative;overflow:hidden}
+.service-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:3px;background:var(--gold);transform:scaleX(0);transition:transform .3s}
+.service-card:hover::before{transform:scaleX(1)}
+.service-card:hover{border-color:var(--gold);transform:translateY(-5px)}
+.service-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem}
+.service-name{font-family:'Oswald',sans-serif;font-size:1.2rem;font-weight:600;letter-spacing:1px;text-transform:uppercase}
+.service-price{font-family:'Oswald',sans-serif;font-size:1.6rem;font-weight:700;color:var(--gold)}
+.service-desc{font-size:.85rem;color:var(--gray);line-height:1.6}
+.service-time{display:inline-flex;align-items:center;gap:.4rem;font-size:.75rem;color:var(--gray-dark);margin-top:1rem;letter-spacing:1px}
+
+/* ===== GALLERY ===== */
+.gallery{background:var(--bg)}
+.gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;max-width:1200px;margin:0 auto}
+.gallery-item{aspect-ratio:1;background:var(--card);border:2px dashed var(--border);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;transition:all .3s;cursor:pointer;position:relative;overflow:hidden}
+.gallery-item:hover{border-color:var(--gold);background:rgba(201,168,76,.05)}
+.gallery-item svg{width:40px;height:40px;color:var(--gold);opacity:.7}
+.gallery-item span{font-family:'Oswald',sans-serif;font-size:.8rem;letter-spacing:2px;text-transform:uppercase;color:var(--gray-dark)}
+.gallery-item.large{grid-column:span 2;grid-row:span 2;aspect-ratio:auto}
+.gallery-item.large svg{width:60px;height:60px}
+.gallery-item.large span{font-size:1rem}
+
+/* ===== REVIEWS ===== */
+.reviews{background:#0A0A0A}
+.reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;max-width:1200px;margin:0 auto}
+.review-card{background:var(--card);border:1px solid var(--border);padding:2.5rem;transition:all .3s;position:relative}
+.review-card:hover{border-color:var(--gold)}
+.review-stars{color:var(--gold);font-size:1.1rem;margin-bottom:1.5rem;letter-spacing:2px}
+.review-text{font-size:1rem;color:var(--gray);line-height:1.8;margin-bottom:2rem;font-style:italic}
+.review-author{display:flex;align-items:center;gap:1rem}
+.review-avatar{width:48px;height:48px;background:var(--border);display:flex;align-items:center;justify-content:center;font-family:'Oswald',sans-serif;font-weight:700;color:var(--gold);font-size:1.2rem}
+.review-name{font-weight:600;font-size:.95rem}
+.review-date{font-size:.8rem;color:var(--gray-dark)}
+
+/* ===== BOOK / VISIT ===== */
+.book{background:var(--bg);position:relative;overflow:hidden}
+.book-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;max-width:1200px;margin:0 auto;align-items:center}
+.book-info h3{font-family:'Oswald',sans-serif;font-size:1.8rem;font-weight:600;margin-bottom:1.5rem;letter-spacing:2px;text-transform:uppercase}
+.book-details{margin-bottom:2rem}
+.book-detail{display:flex;align-items:flex-start;gap:1rem;margin-bottom:1.2rem}
+.book-detail svg{width:20px;height:20px;color:var(--gold);flex-shrink:0;margin-top:3px}
+.book-detail div{font-size:.95rem}
+.book-detail div strong{display:block;color:var(--white);margin-bottom:.2rem}
+.book-detail div span{color:var(--gray)}
+.hours-grid{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-top:1rem}
+.hour-row{display:flex;justify-content:space-between;font-size:.9rem;padding:.4rem 0;border-bottom:1px solid var(--border)}
+.hour-day{color:var(--gray)}
+.hour-time{color:var(--white);font-weight:500}
+.book-actions{display:flex;gap:1rem;margin-top:2rem;flex-wrap:wrap}
+.book-btn{background:var(--gold);color:var(--bg);padding:1rem 2.5rem;font-family:'Oswald',sans-serif;font-size:1rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;border:none;cursor:pointer;transition:all .3s}
+.book-btn:hover{background:var(--gold-light);transform:translateY(-3px);box-shadow:0 10px 40px rgba(201,168,76,.3)}
+.call-btn{background:transparent;color:var(--white);padding:1rem 2.5rem;font-family:'Oswald',sans-serif;font-size:1rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;border:1px solid var(--border);cursor:pointer;transition:all .3s}
+.call-btn:hover{border-color:var(--gold);color:var(--gold)}
+
+/* Loyalty Card */
+.loyalty-card{background:linear-gradient(135deg,#1A1A1A 0%,#2A2A2A 100%);border:2px solid var(--gold);padding:2rem;text-align:center;position:relative;overflow:hidden}
+.loyalty-card::before{content:'';position:absolute;top:-50%;right:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(201,168,76,.08) 0%,transparent 70%);pointer-events:none}
+.loyalty-icon{font-size:3rem;margin-bottom:1rem}
+.loyalty-title{font-family:'Oswald',sans-serif;font-size:1.3rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;margin-bottom:.5rem;color:var(--gold)}
+.loyalty-desc{font-size:.9rem;color:var(--gray);margin-bottom:1.5rem}
+.loyty-stamps{display:flex;justify-content:center;gap:.8rem;margin-bottom:1.5rem}
+.loyalty-stamp{width:36px;height:36px;border:2px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem;color:var(--gold)}
+.loyalty-stamp.filled{background:var(--gold);color:var(--bg)}
+.loyalty-note{font-size:.8rem;color:var(--gray-dark);letter-spacing:1px}
+
+/* ===== FOOTER ===== */
+footer{background:#080808;border-top:1px solid var(--border);padding:3rem 5% 2rem}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:3rem;max-width:1200px;margin:0 auto}
+.footer-brand .logo{font-size:2rem;margin-bottom:1rem}
+.footer-brand p{color:var(--gray);font-size:.9rem;max-width:300px;line-height:1.7}
+.footer-title{font-family:'Oswald',sans-serif;font-size:1rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;margin-bottom:1.5rem;color:var(--white)}
+.footer-links li{margin-bottom:.8rem}
+.footer-links a{color:var(--gray);font-size:.9rem;transition:color .3s}
+.footer-links a:hover{color:var(--gold)}
+.footer-contact li{display:flex;align-items:center;gap:.8rem;margin-bottom:.8rem;color:var(--gray);font-size:.9rem}
+.footer-contact svg{width:16px;height:16px;color:var(--gold);flex-shrink:0}
+.footer-bottom{border-top:1px solid var(--border);margin-top:3rem;padding-top:2rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;max-width:1200px;margin-left:auto;margin-right:auto}
+.footer-bottom p{color:var(--gray-dark);font-size:.8rem;letter-spacing:1px}
+.footer-bottom a{color:var(--gold);transition:color .3s}
+.footer-bottom a:hover{color:var(--gold-light)}
+
+/* ===== ANIMATIONS ===== */
+.fade-in{opacity:0;transform:translateY(40px);transition:opacity .8s ease,transform .8s ease}
+.fade-in.visible{opacity:1;transform:translateY(0)}
+.fade-in-delay-1{transition-delay:.1s}
+.fade-in-delay-2{transition-delay:.2s}
+.fade-in-delay-3{transition-delay:.3s}
+
+/* ===== MOBILE ===== */
+@media(max-width:768px){
+  .nav-links{position:fixed;top:0;right:-100%;width:70%;max-width:300px;height:100vh;background:rgba(15,15,15,.98);flex-direction:column;justify-content:center;gap:2rem;transition:right .3s}
+  .nav-links.active{right:0}
+  .hamburger{display:flex}
+  .hero{min-height:600px}
+  .hero-title{letter-spacing:6px}
+  section{padding:4rem 5%}
+  .about-grid{grid-template-columns:1fr;gap:2rem}
+  .about-img-small{display:none}
+  .stats-grid{grid-template-columns:repeat(3,1fr);gap:1rem}
+  .amenities{grid-template-columns:repeat(2,1fr)}
+  .services-grid{grid-template-columns:1fr}
+  .gallery-grid{grid-template-columns:repeat(2,1fr)}
+  .gallery-item.large{grid-column:span 2;grid-row:span 1}
+  .reviews-grid{grid-template-columns:1fr}
+  .book-grid{grid-template-columns:1fr;gap:3rem}
+  .footer-grid{grid-template-columns:1fr;text-align:center}
+  .footer-brand p{max-width:100%}
+  .book-actions{justify-content:center}
+}
+
+@media(max-width:480px){
+  .stats-grid{grid-template-columns:1fr}
+  .amenities{grid-template-columns:1fr}
+  .gallery-grid{grid-template-columns:1fr}
+  .gallery-item.large{grid-column:span 1}
+  .hero-badge{font-size:.75rem;padding:.4rem 1rem}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== NAVIGATION ===== -->
+<nav id="navbar">
+  <a href="#" class="logo">LA <span>CAVE</span></a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#book" class="nav-cta">Book Now</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+      <span>5.0 Rating | 108 Reviews</span>
+    </div>
+    <h1 class="hero-title">LA CAVE<span>Turkish Barber</span></h1>
+    <div class="hero-divider"></div>
+    <p class="hero-subtitle">Premium Grooming &mdash; Leeds</p>
+    <a href="#book" class="hero-cta">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+      Book Appointment
+    </a>
+  </div>
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="line"></div>
+  </div>
+</section>
+
+<!-- ===== ABOUT ===== -->
+<section class="about" id="about">
+  <div class="section-header fade-in">
+    <p class="section-label">The Shop</p>
+    <h2 class="section-title">About LA Cave</h2>
+    <div class="section-divider"></div>
+    <p class="section-subtitle">Where tradition meets modern style. Experience the art of Turkish barbering in the heart of Leeds.</p>
+  </div>
+  <div class="about-grid">
+    <div class="about-images fade-in">
+      <div class="about-img-main">
+        <img src="images/haircut.jpg" alt="LA Cave Turkish Barber - Precision Haircut">
+      </div>
+      <div class="about-img-small">
+        <img src="images/shave.jpg" alt="LA Cave Turkish Barber - Hot Towel Shave">
+      </div>
+    </div>
+    <div class="about-content fade-in fade-in-delay-1">
+      <h3>Leeds' Premier Turkish Barber</h3>
+      <p>Located on Butcher Hill in the heart of Leeds, LA Cave Turkish Barber delivers an authentic grooming experience that blends centuries-old Turkish barbering traditions with contemporary styling techniques.</p>
+      <p>Our master barbers are dedicated to their craft, ensuring every client leaves looking sharp and feeling refreshed. From precision fades to traditional hot towel shaves, we take pride in every cut.</p>
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div class="stat-number">108</div>
+          <div class="stat-label">5-Star Reviews</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">5000+</div>
+          <div class="stat-label">Happy Clients</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">10+</div>
+          <div class="stat-label">Years Experience</div>
+        </div>
+      </div>
+      <div class="amenities">
+        <div class="amenity">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+          Free Parking
+        </div>
+        <div class="amenity">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
+          Card Payments
+        </div>
+        <div class="amenity">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg>
+          Wheelchair Accessible
+        </div>
+        <div class="amenity">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+          Child-Friendly
+        </div>
+        <div class="amenity">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0"></path><path d="M1.42 9a16 16 0 0 1 21.16 0"></path><path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path><line x1="12" y1="20" x2="12.01" y2="20"></line></svg>
+          Free Wi-Fi
+        </div>
+        <div class="amenity">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+          Loyalty Program
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SERVICES ===== -->
+<section class="services" id="services">
+  <div class="section-header fade-in">
+    <p class="section-label">What We Do</p>
+    <h2 class="section-title">Our Services</h2>
+    <div class="section-divider"></div>
+    <p class="section-subtitle">Premium grooming services at competitive prices. Every service is delivered with precision and care.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card fade-in">
+      <div class="service-header">
+        <span class="service-name">Haircut</span>
+        <span class="service-price">&pound;16</span>
+      </div>
+      <p class="service-desc">Precision cut tailored to your style. Includes consultation, wash, and styling.</p>
+      <span class="service-time">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+        30 mins
+      </span>
+    </div>
+    <div class="service-card fade-in fade-in-delay-1">
+      <div class="service-header">
+        <span class="service-name">Skin Fade</span>
+        <span class="service-price">&pound;17</span>
+      </div>
+      <p class="service-desc">Expert fade from skin to your desired length. Clean, sharp lines guaranteed.</p>
+      <span class="service-time">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+        40 mins
+      </span>
+    </div>
+    <div class="service-card fade-in fade-in-delay-2">
+      <div class="service-header">
+        <span class="service-name">Beard Grooming</span>
+        <span class="service-price">&pound;17</span>
+      </div>
+      <p class="service-desc">Shape, trim and style your beard. Includes hot towel treatment and oils.</p>
+      <span class="service-time">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+        25 mins
+      </span>
+    </div>
+    <div class="service-card fade-in">
+      <div class="service-header">
+        <span class="service-name">Haircut &amp; Beard</span>
+        <span class="service-price">&pound;33</span>
+      </div>
+      <p class="service-desc">The complete package. Fresh cut and beard shape-up for the ultimate look.</p>
+      <span class="service-time">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+        55 mins
+      </span>
+    </div>
+    <div class="service-card fade-in fade-in-delay-1">
+      <div class="service-header">
+        <span class="service-name">Hot Towel Shave</span>
+        <span class="service-price">&pound;18</span>
+      </div>
+      <p class="service-desc">Traditional straight razor shave with hot towels. The ultimate relaxation.</p>
+      <span class="service-time">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+        30 mins
+      </span>
+    </div>
+    <div class="service-card fade-in fade-in-delay-2">
+      <div class="service-header">
+        <span class="service-name">Head Shave</span>
+        <span class="service-price">&pound;17</span>
+      </div>
+      <p class="service-desc">Clean head shave with razor finish. Includes hot towel and moisturiser.</p>
+      <span class="service-time">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+        25 mins
+      </span>
+    </div>
+    <div class="service-card fade-in">
+      <div class="service-header">
+        <span class="service-name">Kids Haircut</span>
+        <span class="service-price">&pound;15</span>
+      </div>
+      <p class="service-desc">Gentle and patient service for the little ones. Ages 12 and under.</p>
+      <span class="service-time">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+        25 mins
+      </span>
+    </div>
+    <div class="service-card fade-in fade-in-delay-1">
+      <div class="service-header">
+        <span class="service-name">Full Service</span>
+        <span class="service-price">&pound;60</span>
+      </div>
+      <p class="service-desc">The VIP treatment. Haircut, beard, hot towel shave, facial &amp; more.</p>
+      <span class="service-time">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+        90 mins
+      </span>
+    </div>
+    <div class="service-card fade-in fade-in-delay-2">
+      <div class="service-header">
+        <span class="service-name">Hair Colour</span>
+        <span class="service-price">&pound;20</span>
+      </div>
+      <p class="service-desc">Professional colouring to enhance your style. Consultation included.</p>
+      <span class="service-time">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+        45 mins
+      </span>
+    </div>
+    <div class="service-card fade-in">
+      <div class="service-header">
+        <span class="service-name">Eyebrow Shaping</span>
+        <span class="service-price">&pound;8</span>
+      </div>
+      <p class="service-desc">Clean, defined eyebrows to frame your face. Threading or waxing.</p>
+      <span class="service-time">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+        10 mins
+      </span>
+    </div>
+    <div class="service-card fade-in fade-in-delay-1">
+      <div class="service-header">
+        <span class="service-name">Patterns</span>
+        <span class="service-price">&pound;10</span>
+      </div>
+      <p class="service-desc">Creative hair designs and patterns. Make your cut truly unique.</p>
+      <span class="service-time">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+        15 mins
+      </span>
+    </div>
+    <div class="service-card fade-in fade-in-delay-2">
+      <div class="service-header">
+        <span class="service-name">Beard Colour</span>
+        <span class="service-price">&pound;10</span>
+      </div>
+      <p class="service-desc">Match or enhance your beard colour. Professional dye application.</p>
+      <span class="service-time">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+        20 mins
+      </span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== GALLERY ===== -->
+<section class="gallery" id="gallery">
+  <div class="section-header fade-in">
+    <p class="section-label">Portfolio</p>
+    <h2 class="section-title">The Gallery</h2>
+    <div class="section-divider"></div>
+    <p class="section-subtitle">A showcase of our finest work. These spots are ready for your best cuts.</p>
+  </div>
+  <div class="gallery-grid">
+    <div class="gallery-item large fade-in">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="6" cy="6" r="3"></circle><circle cx="6" cy="18" r="3"></circle><line x1="20" y1="4" x2="8.12" y2="15.88"></line><line x1="14.47" y1="14.48" x2="20" y2="20"></line><line x1="8.12" y1="8.12" x2="12" y2="12"></line></svg>
+      <span>Your Best Cuts Here</span>
+    </div>
+    <div class="gallery-item fade-in fade-in-delay-1">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="6" cy="6" r="3"></circle><circle cx="6" cy="18" r="3"></circle><line x1="20" y1="4" x2="8.12" y2="15.88"></line><line x1="14.47" y1="14.48" x2="20" y2="20"></line><line x1="8.12" y1="8.12" x2="12" y2="12"></line></svg>
+      <span>Your Best Cuts Here</span>
+    </div>
+    <div class="gallery-item fade-in fade-in-delay-2">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="6" cy="6" r="3"></circle><circle cx="6" cy="18" r="3"></circle><line x1="20" y1="4" x2="8.12" y2="15.88"></line><line x1="14.47" y1="14.48" x2="20" y2="20"></line><line x1="8.12" y1="8.12" x2="12" y2="12"></line></svg>
+      <span>Your Best Cuts Here</span>
+    </div>
+    <div class="gallery-item fade-in">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="6" cy="6" r="3"></circle><circle cx="6" cy="18" r="3"></circle><line x1="20" y1="4" x2="8.12" y2="15.88"></line><line x1="14.47" y1="14.48" x2="20" y2="20"></line><line x1="8.12" y1="8.12" x2="12" y2="12"></line></svg>
+      <span>Your Best Cuts Here</span>
+    </div>
+    <div class="gallery-item fade-in fade-in-delay-1">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="6" cy="6" r="3"></circle><circle cx="6" cy="18" r="3"></circle><line x1="20" y1="4" x2="8.12" y2="15.88"></line><line x1="14.47" y1="14.48" x2="20" y2="20"></line><line x1="8.12" y1="8.12" x2="12" y2="12"></line></svg>
+      <span>Your Best Cuts Here</span>
+    </div>
+    <div class="gallery-item fade-in fade-in-delay-2">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="6" cy="6" r="3"></circle><circle cx="6" cy="18" r="3"></circle><line x1="20" y1="4" x2="8.12" y2="15.88"></line><line x1="14.47" y1="14.48" x2="20" y2="20"></line><line x1="8.12" y1="8.12" x2="12" y2="12"></line></svg>
+      <span>Your Best Cuts Here</span>
+    </div>
+    <div class="gallery-item fade-in">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="6" cy="6" r="3"></circle><circle cx="6" cy="18" r="3"></circle><line x1="20" y1="4" x2="8.12" y2="15.88"></line><line x1="14.47" y1="14.48" x2="20" y2="20"></line><line x1="8.12" y1="8.12" x2="12" y2="12"></line></svg>
+      <span>Your Best Cuts Here</span>
+    </div>
+    <div class="gallery-item fade-in fade-in-delay-1">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="6" cy="6" r="3"></circle><circle cx="6" cy="18" r="3"></circle><line x1="20" y1="4" x2="8.12" y2="15.88"></line><line x1="14.47" y1="14.48" x2="20" y2="20"></line><line x1="8.12" y1="8.12" x2="12" y2="12"></line></svg>
+      <span>Your Best Cuts Here</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== REVIEWS ===== -->
+<section class="reviews" id="reviews">
+  <div class="section-header fade-in">
+    <p class="section-label">Testimonials</p>
+    <h2 class="section-title">Client Reviews</h2>
+    <div class="section-divider"></div>
+    <p class="section-subtitle">Don't just take our word for it. Here's what our clients have to say.</p>
+  </div>
+  <div class="reviews-grid">
+    <div class="review-card fade-in">
+      <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <p class="review-text">"Absolutely the best barber in Leeds. The attention to detail is incredible. My fade has never looked this clean. The hot towel treatment at the end is the perfect finish. Highly recommend!"</p>
+      <div class="review-author">
+        <div class="review-avatar">JM</div>
+        <div>
+          <div class="review-name">James Mitchell</div>
+          <div class="review-date">December 2024</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-card fade-in fade-in-delay-1">
+      <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <p class="review-text">"Been coming here for over a year now and wouldn't go anywhere else. The atmosphere is great, the staff are friendly and skilled. The loyalty card is a nice bonus too. Top class service every time."</p>
+      <div class="review-author">
+        <div class="review-avatar">AK</div>
+        <div>
+          <div class="review-name">Ahmed Khan</div>
+          <div class="review-date">November 2024</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-card fade-in fade-in-delay-2">
+      <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <p class="review-text">"Took my son for his first proper haircut and they were brilliant with him. Patient, professional, and the result was fantastic. The shop has a great vibe and the prices are very fair."</p>
+      <div class="review-author">
+        <div class="review-avatar">SR</div>
+        <div>
+          <div class="review-name">Sarah Reynolds</div>
+          <div class="review-date">October 2024</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== BOOK / VISIT ===== -->
+<section class="book" id="book">
+  <div class="section-header fade-in">
+    <p class="section-label">Get In Touch</p>
+    <h2 class="section-title">Book &amp; Visit</h2>
+    <div class="section-divider"></div>
+    <p class="section-subtitle">Walk in or book ahead. We're ready when you are.</p>
+  </div>
+  <div class="book-grid">
+    <div class="book-info fade-in">
+      <h3>Visit The Shop</h3>
+      <div class="book-details">
+        <div class="book-detail">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+          <div>
+            <strong>Address</strong>
+            <span>193 Butcher Hill, Leeds LS16 5BQ<br>Next to Roy's Cafe</span>
+          </div>
+        </div>
+        <div class="book-detail">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+          <div>
+            <strong>Opening Hours</strong>
+            <div class="hours-grid">
+              <div class="hour-row"><span class="hour-day">Mon - Fri</span><span class="hour-time">9:00 - 19:00</span></div>
+              <div class="hour-row"><span class="hour-day">Saturday</span><span class="hour-time">9:00 - 18:00</span></div>
+              <div class="hour-row"><span class="hour-day">Sunday</span><span class="hour-time">10:00 - 16:00</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="book-detail">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+          <div>
+            <strong>Phone</strong>
+            <span>Walk-ins welcome. Call for availability.</span>
+          </div>
+        </div>
+      </div>
+      <div class="book-actions">
+        <a href="tel:+44113" class="book-btn">Book Appointment</a>
+        <a href="tel:+44113" class="call-btn">Call Now</a>
+      </div>
+    </div>
+    <div class="loyalty-section fade-in fade-in-delay-1">
+      <div class="loyalty-card">
+        <div class="loyalty-icon">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+        </div>
+        <h4 class="loyalty-title">Loyalty Card</h4>
+        <p class="loyalty-desc">Collect stamps with every visit. Your 10th service is on us!</p>
+        <div class="loyty-stamps">
+          <div class="loyalty-stamp filled">&#10003;</div>
+          <div class="loyalty-stamp filled">&#10003;</div>
+          <div class="loyalty-stamp filled">&#10003;</div>
+          <div class="loyalty-stamp filled">&#10003;</div>
+          <div class="loyalty-stamp filled">&#10003;</div>
+          <div class="loyalty-stamp filled">&#10003;</div>
+          <div class="loyalty-stamp filled">&#10003;</div>
+          <div class="loyalty-stamp">8</div>
+          <div class="loyalty-stamp">9</div>
+          <div class="loyalty-stamp">10</div>
+        </div>
+        <p class="loyalty-note">7 stamps collected &mdash; 3 more for a free haircut!</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="logo">LA <span>CAVE</span></div>
+      <p>Premium Turkish barbering in the heart of Leeds. Traditional craftsmanship meets modern style since 2014.</p>
+    </div>
+    <div class="footer-nav">
+      <h4 class="footer-title">Quick Links</h4>
+      <ul class="footer-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#reviews">Reviews</a></li>
+        <li><a href="#book">Book Now</a></li>
+      </ul>
+    </div>
+    <div class="footer-contact">
+      <h4 class="footer-title">Contact</h4>
+      <ul>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+          193 Butcher Hill, Leeds LS16 5BQ
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+          Mon-Sat: 9am-7pm, Sun: 10am-4pm
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
+          Card Payments Accepted
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p> LA Cave Turkish Barber. All rights reserved.</p>
+    <p>Website by <a href="#">West Yorkshire Web Designs</a></p>
+  </div>
+</footer>
+
+<script>
+// ===== NAVBAR SCROLL =====
+const navbar=document.getElementById('navbar');
+window.addEventListener('scroll',()=>{
+  if(window.scrollY>50){navbar.classList.add('scrolled')}
+  else{navbar.classList.remove('scrolled')}
+});
+
+// ===== HAMBURGER MENU =====
+const hamburger=document.getElementById('hamburger');
+const navLinks=document.getElementById('navLinks');
+hamburger.addEventListener('click',()=>{
+  hamburger.classList.toggle('active');
+  navLinks.classList.toggle('active');
+});
+document.querySelectorAll('.nav-links a').forEach(link=>{
+  link.addEventListener('click',()=>{
+    hamburger.classList.remove('active');
+    navLinks.classList.remove('active');
+  });
+});
+
+// ===== FADE-IN ANIMATION =====
+const fadeElements=document.querySelectorAll('.fade-in');
+const fadeObserver=new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add('visible');
+    }
+  });
+},{threshold:0.1});
+fadeElements.forEach(el=>fadeObserver.observe(el));
+
+// ===== SMOOTH SCROLL =====
+document.querySelectorAll('a[href^="#"]').forEach(anchor=>{
+  anchor.addEventListener('click',function(e){
+    const href=this.getAttribute('href');
+    if(href!=='#'){
+      e.preventDefault();
+      const target=document.querySelector(href);
+      if(target){
+        target.scrollIntoView({behavior:'smooth',block:'start'});
+      }
+    }
+  });
+});
+</script>
+</body>
+</html>

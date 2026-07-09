@@ -1,0 +1,1223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Richard Goodale Hairdresser | Bramhope, Leeds</title>
+    <meta name="description" content="Richard Goodale Hairdresser - A warm, welcoming village salon in Bramhope, Leeds. Ladies and gents styling, colouring, wedding hair and more.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #FAF7F4;
+            --text: #2C2C2C;
+            --rose: #B8837A;
+            --gold: #D4A574;
+            --white: #FFFFFF;
+            --light-rose: #F5E6E2;
+            --light-gold: #F9F0E8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text);
+            background-color: var(--bg);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 500;
+            line-height: 1.2;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* ---- Fade In Animation ---- */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .fade-in-delay-1 { transition-delay: 0.1s; }
+        .fade-in-delay-2 { transition-delay: 0.2s; }
+        .fade-in-delay-3 { transition-delay: 0.3s; }
+        .fade-in-delay-4 { transition-delay: 0.4s; }
+        .fade-in-delay-5 { transition-delay: 0.5s; }
+
+        /* ---- Navigation ---- */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.4s ease;
+        }
+
+        nav.scrolled {
+            background: rgba(250, 247, 244, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+            padding: 14px 40px;
+        }
+
+        .nav-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text);
+            letter-spacing: 1px;
+            transition: color 0.4s ease;
+        }
+
+        nav.scrolled .nav-logo {
+            color: var(--text);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            font-size: 0.85rem;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+            color: var(--text);
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        nav.scrolled .nav-links a {
+            color: var(--text);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--rose);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--rose);
+        }
+
+        .nav-cta {
+            background: var(--rose);
+            color: var(--white) !important;
+            padding: 10px 24px;
+            border-radius: 30px;
+            font-weight: 500 !important;
+            transition: all 0.3s ease !important;
+        }
+
+        .nav-cta:hover {
+            background: #a67268;
+            transform: translateY(-2px);
+        }
+
+        .nav-cta::after {
+            display: none !important;
+        }
+
+        .mobile-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .mobile-toggle span {
+            width: 24px;
+            height: 2px;
+            background: var(--text);
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled .mobile-toggle span {
+            background: var(--text);
+        }
+
+        /* ---- Hero ---- */
+        .hero {
+            position: relative;
+            height: 100vh;
+            min-height: 700px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background: url('images/hero.jpg') center center / cover no-repeat;
+            filter: brightness(0.92) saturate(0.88);
+            transform: scale(1.05);
+            animation: heroZoom 12s ease-out forwards;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(250,247,244,0.72) 0%, rgba(250,247,244,0.45) 45%, rgba(250,247,244,0.78) 100%);
+            z-index: 1;
+        }
+
+        .hero-backdrop {
+            display: none;
+        }
+
+        @keyframes heroZoom {
+            to { transform: scale(1); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: var(--text);
+            padding: 0 20px;
+            max-width: 800px;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(2.8rem, 7vw, 5.5rem);
+            font-weight: 400;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+            font-style: italic;
+        }
+
+        .hero-line {
+            width: 60px;
+            height: 1px;
+            background: var(--rose);
+            margin: 16px auto;
+            opacity: 0;
+            animation: fadeInLine 1s ease-out 0.8s forwards;
+        }
+
+        @keyframes fadeInLine {
+            to { opacity: 1; }
+        }
+
+        .hero-subtitle {
+            font-size: clamp(0.9rem, 2vw, 1.15rem);
+            font-weight: 300;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            margin-bottom: 32px;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 0.5s forwards;
+        }
+
+        .hero-tagline {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.3rem, 3vw, 1.9rem);
+            font-weight: 400;
+            font-style: italic;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 1.2s forwards;
+            color: var(--rose);
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-scroll {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 2s forwards;
+        }
+
+        .hero-scroll a {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            color: var(--white);
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+        }
+
+        .hero-scroll a:hover {
+            color: var(--rose);
+        }
+
+        .scroll-line {
+            width: 1px;
+            height: 40px;
+            background: linear-gradient(to bottom, var(--white), transparent);
+            animation: scrollPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes scrollPulse {
+            0%, 100% { opacity: 0.4; transform: scaleY(1); }
+            50% { opacity: 1; transform: scaleY(1.2); }
+        }
+
+        /* ---- Section Base ---- */
+        .section {
+            padding: 100px 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            color: var(--text);
+            margin-bottom: 12px;
+        }
+
+        .section-header .line {
+            width: 50px;
+            height: 2px;
+            background: var(--rose);
+            margin: 0 auto 16px;
+        }
+
+        .section-header p {
+            font-size: 1rem;
+            color: #777;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        /* ---- About ---- */
+        .about-section {
+            background: var(--white);
+        }
+
+        .about-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 100px 40px;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-images {
+            position: relative;
+        }
+
+        .about-img-main {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+        }
+
+        .about-img-float {
+            position: absolute;
+            bottom: -30px;
+            right: -20px;
+            width: 200px;
+            height: 200px;
+            border-radius: 16px;
+            object-fit: cover;
+            border: 6px solid var(--white);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.12);
+        }
+
+        .about-text h2 {
+            font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+            margin-bottom: 20px;
+        }
+
+        .about-text p {
+            color: #666;
+            margin-bottom: 16px;
+            font-size: 0.97rem;
+        }
+
+        .about-text .highlight {
+            color: var(--rose);
+            font-weight: 500;
+        }
+
+        /* ---- Services ---- */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+        }
+
+        .service-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: 0 4px 30px rgba(0,0,0,0.04);
+            transition: all 0.4s ease;
+            border: 1px solid transparent;
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 16px 50px rgba(0,0,0,0.08);
+            border-color: var(--light-rose);
+        }
+
+        .service-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: var(--light-rose);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 1.6rem;
+        }
+
+        .service-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 10px;
+        }
+
+        .service-card p {
+            font-size: 0.88rem;
+            color: #888;
+            line-height: 1.6;
+        }
+
+        /* ---- Team ---- */
+        .team-section {
+            background: linear-gradient(135deg, var(--light-gold) 0%, var(--light-rose) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .team-section::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: rgba(184, 131, 122, 0.08);
+        }
+
+        .team-section::after {
+            content: '';
+            position: absolute;
+            bottom: -80px;
+            left: -80px;
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            background: rgba(212, 165, 116, 0.1);
+        }
+
+        .team-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 100px 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .team-card {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            background: var(--white);
+            border-radius: 24px;
+            padding: 50px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.06);
+        }
+
+        .team-img {
+            width: 280px;
+            height: 360px;
+            border-radius: 20px;
+            object-fit: cover;
+            flex-shrink: 0;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        .team-info h3 {
+            font-size: 2rem;
+            margin-bottom: 4px;
+        }
+
+        .team-role {
+            color: var(--rose);
+            font-weight: 500;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .team-info p {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 12px;
+        }
+
+        .team-quote {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            color: var(--gold);
+            font-size: 1.1rem;
+            margin-top: 16px;
+            padding-left: 20px;
+            border-left: 2px solid var(--rose);
+        }
+
+        /* ---- Reviews ---- */
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+        }
+
+        .review-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 36px 30px;
+            box-shadow: 0 4px 30px rgba(0,0,0,0.04);
+            transition: all 0.4s ease;
+        }
+
+        .review-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.07);
+        }
+
+        .review-stars {
+            color: var(--gold);
+            font-size: 1.1rem;
+            margin-bottom: 16px;
+            letter-spacing: 2px;
+        }
+
+        .review-text {
+            font-size: 0.93rem;
+            color: #555;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .reviewer-name {
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .reviewer-service {
+            font-size: 0.8rem;
+            color: #999;
+        }
+
+        /* ---- Visit Us ---- */
+        .visit-section {
+            background: var(--white);
+        }
+
+        .visit-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 100px 40px;
+        }
+
+        .visit-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: start;
+        }
+
+        .visit-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .visit-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            margin-bottom: 24px;
+        }
+
+        .visit-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: var(--light-rose);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .visit-item-content h4 {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--rose);
+            margin-bottom: 4px;
+        }
+
+        .visit-item-content p {
+            color: #555;
+            font-size: 0.92rem;
+        }
+
+        .visit-item-content a {
+            color: var(--rose);
+            transition: color 0.3s ease;
+        }
+
+        .visit-item-content a:hover {
+            color: var(--gold);
+        }
+
+        .hours-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .hours-table tr {
+            border-bottom: 1px solid #f0e6e2;
+        }
+
+        .hours-table tr:last-child {
+            border-bottom: none;
+        }
+
+        .hours-table td {
+            padding: 12px 0;
+            font-size: 0.92rem;
+        }
+
+        .hours-table td:first-child {
+            color: #555;
+        }
+
+        .hours-table td:last-child {
+            text-align: right;
+            font-weight: 500;
+            color: var(--text);
+        }
+
+        .hours-table .closed {
+            color: #ccc;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            margin-top: 28px;
+            background: var(--rose);
+            color: var(--white);
+            padding: 16px 40px;
+            border-radius: 50px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 30px rgba(184, 131, 122, 0.3);
+        }
+
+        .cta-btn:hover {
+            background: #a67268;
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px rgba(184, 131, 122, 0.4);
+        }
+
+        .visit-map {
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            height: 100%;
+            min-height: 400px;
+        }
+
+        .visit-map iframe {
+            width: 100%;
+            height: 100%;
+            min-height: 400px;
+            border: none;
+            filter: saturate(0.7);
+        }
+
+        /* ---- Footer ---- */
+        footer {
+            background: var(--text);
+            color: rgba(255,255,255,0.7);
+            padding: 60px 40px 30px;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .footer-brand h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--white);
+            margin-bottom: 12px;
+        }
+
+        .footer-brand p {
+            font-size: 0.85rem;
+            line-height: 1.7;
+        }
+
+        .footer-col h4 {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--white);
+            margin-bottom: 20px;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col a {
+            font-size: 0.85rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-col a:hover {
+            color: var(--rose);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+        }
+
+        .footer-bottom a {
+            color: var(--rose);
+        }
+
+        /* ---- Responsive ---- */
+        @media (max-width: 992px) {
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .about-images {
+                max-width: 500px;
+                margin: 0 auto;
+            }
+
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .team-card {
+                flex-direction: column;
+                text-align: center;
+                gap: 30px;
+            }
+
+            .team-img {
+                width: 240px;
+                height: 300px;
+            }
+
+            .team-quote {
+                border-left: none;
+                border-top: 2px solid var(--rose);
+                padding-left: 0;
+                padding-top: 16px;
+            }
+
+            .reviews-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .visit-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 70%;
+                max-width: 300px;
+                height: 100vh;
+                background: var(--bg);
+                flex-direction: column;
+                justify-content: center;
+                gap: 24px;
+                transition: right 0.4s ease;
+                box-shadow: -10px 0 40px rgba(0,0,0,0.1);
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links a {
+                color: var(--text) !important;
+                font-size: 1rem;
+            }
+
+            .mobile-toggle {
+                display: flex;
+            }
+
+            .mobile-toggle.active span:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+
+            .mobile-toggle.active span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .mobile-toggle.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(5px, -5px);
+            }
+
+            .section {
+                padding: 70px 20px;
+            }
+
+            .about-container,
+            .visit-container,
+            .team-container {
+                padding: 70px 20px;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .reviews-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .service-card {
+                padding: 30px 24px;
+            }
+
+            .about-img-float {
+                width: 140px;
+                height: 140px;
+                right: -10px;
+                bottom: -20px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 8px;
+                text-align: center;
+            }
+
+            .team-card {
+                padding: 30px 24px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            nav {
+                padding: 16px 20px;
+            }
+
+            nav.scrolled {
+                padding: 12px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <a href="#" class="nav-logo">Richard Goodale</a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#about">About</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#team">Team</a></li>
+            <li><a href="#reviews">Reviews</a></li>
+            <li><a href="#visit">Visit Us</a></li>
+            <li><a href="tel:01132841222" class="nav-cta">Book Appointment</a></li>
+        </ul>
+        <div class="mobile-toggle" id="mobileToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero" id="home">
+        <div class="hero-bg"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-backdrop"></div>
+        <div class="hero-content">
+            <p class="hero-subtitle">Hairdresser</p>
+            <h1>Richard Goodale</h1>
+            <div class="hero-line"></div>
+        </div>
+        <div class="hero-scroll">
+            <a href="#about">
+                <span>Discover</span>
+                <div class="scroll-line"></div>
+            </a>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section class="about-section" id="about">
+        <div class="about-container">
+            <div class="about-grid">
+                <div class="about-images fade-in">
+                    <img src="images/salon.jpg" alt="Richard Goodale Salon Interior" class="about-img-main">
+                    <img src="images/stylist.jpg" alt="Hair stylist at work" class="about-img-float">
+                </div>
+                <div class="about-text fade-in fade-in-delay-2">
+                    <h2>A Warm Welcome Awaits</h2>
+                    <p>Nestled in the heart of <span class="highlight">Bramhope village</span>, Richard Goodale Hairdresser has been a beloved local salon for years. We pride ourselves on creating a warm, friendly atmosphere where every client feels at home from the moment they step through our door.</p>
+                    <p>Our talented team brings together years of experience and a genuine passion for hair. Whether you are after a fresh new look, a subtle trim, or a complete colour transformation, we take the time to understand what you want and deliver results that leave you feeling confident and beautiful.</p>
+                    <p>We believe great hair starts with a great relationship. That is why we have built a salon where conversation flows as easily as the scissors, and where every appointment feels like catching up with an old friend.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section class="section" id="services">
+        <div class="section-header fade-in">
+            <h2>Our Services</h2>
+            <div class="line"></div>
+            <p>From cuts to colours, blow dries to bridal styling - we have got you covered.</p>
+        </div>
+        <div class="services-grid">
+            <div class="service-card fade-in fade-in-delay-1">
+                <div class="service-icon">&#10047;</div>
+                <h3>Ladies Cut & Style</h3>
+                <p>From precision cuts to layered styles, tailored to your face shape, lifestyle, and personal taste.</p>
+            </div>
+            <div class="service-card fade-in fade-in-delay-2">
+                <div class="service-icon">&#9830;</div>
+                <h3>Men's Cut</h3>
+                <p>Classic barbering and modern men's styling, including beard trims and hot towel finishes.</p>
+            </div>
+            <div class="service-card fade-in fade-in-delay-3">
+                <div class="service-icon">&#10025;</div>
+                <h3>Colour & Highlights</h3>
+                <p>Full colour, balayage, foils, root touch-ups and creative colour using premium products.</p>
+            </div>
+            <div class="service-card fade-in fade-in-delay-1">
+                <div class="service-icon">&#9733;</div>
+                <h3>Blow Dry</h3>
+                <p>Smooth, voluminous, or bouncy curls - a professional blow dry to finish your look to perfection.</p>
+            </div>
+            <div class="service-card fade-in fade-in-delay-2">
+                <div class="service-icon">&#9829;</div>
+                <h3>Wedding Hair</h3>
+                <p>Bridal trials, wedding party styling, and on-location services for your special day.</p>
+            </div>
+            <div class="service-card fade-in fade-in-delay-3">
+                <div class="service-icon">&#10086;</div>
+                <h3>Treatments</h3>
+                <p>Deep conditioning, keratin treatments, Olaplex, and scalp therapies to restore and rejuvenate.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team -->
+    <section class="team-section" id="team">
+        <div class="team-container">
+            <div class="section-header fade-in">
+                <h2>Meet the Team</h2>
+                <div class="line"></div>
+                <p>The friendly faces behind your favourite styles.</p>
+            </div>
+            <div class="team-card fade-in fade-in-delay-2">
+                <img src="images/stylist.jpg" alt="Katie - Senior Stylist" class="team-img">
+                <div class="team-info">
+                    <h3>Katie</h3>
+                    <p class="team-role">Senior Stylist</p>
+                    <p>Katie is the heart of Richard Goodale Hairdresser. With her warm smile and expert eye for style, she has built a loyal following of clients who trust her completely with their hair.</p>
+                    <p>From precision cuts to stunning colour work, Katie brings creativity and care to every appointment. She takes the time to listen, advise, and craft a look that suits each client perfectly.</p>
+                    <p class="team-quote">"Praised for her lovely demeanour and skilled hairdressing."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews -->
+    <section class="section" id="reviews">
+        <div class="section-header fade-in">
+            <h2>What Our Clients Say</h2>
+            <div class="line"></div>
+            <p>Real words from our wonderful clients in Bramhope and beyond.</p>
+        </div>
+        <div class="reviews-grid">
+            <div class="review-card fade-in fade-in-delay-1">
+                <div class="review-stars">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
+                <p class="review-text">"Katie was absolutely wonderful. She listened to exactly what I wanted and my hair has never looked better. The salon itself is so warm and inviting - I felt pampered from start to finish."</p>
+                <p class="reviewer-name">Sarah M.</p>
+                <p class="reviewer-service">Ladies Cut & Colour</p>
+            </div>
+            <div class="review-card fade-in fade-in-delay-2">
+                <div class="review-stars">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
+                <p class="review-text">"I have been coming here for years and would not go anywhere else. The team are so friendly and professional. Katie always knows exactly what my hair needs. A real village gem!"</p>
+                <p class="reviewer-name">Emma T.</p>
+                <p class="reviewer-service">Regular Client</p>
+            </div>
+            <div class="review-card fade-in fade-in-delay-3">
+                <div class="review-stars">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
+                <p class="review-text">"Had my wedding hair trial and the big day styling here. Katie made me feel like an absolute princess. The whole experience was seamless and stress-free. Highly recommend!"</p>
+                <p class="reviewer-name">Jessica H.</p>
+                <p class="reviewer-service">Wedding Hair</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Visit Us -->
+    <section class="visit-section" id="visit">
+        <div class="visit-container">
+            <div class="section-header fade-in">
+                <h2>Visit Us</h2>
+                <div class="line"></div>
+                <p>We would love to welcome you to our salon in Bramhope.</p>
+            </div>
+            <div class="visit-grid">
+                <div class="visit-details fade-in fade-in-delay-1">
+                    <div class="visit-item">
+                        <div class="visit-icon">&#8962;</div>
+                        <div class="visit-item-content">
+                            <h4>Address</h4>
+                            <p>3 The Parade, Breary Lane<br>Bramhope, Leeds LS16 9AF</p>
+                        </div>
+                    </div>
+                    <div class="visit-item">
+                        <div class="visit-icon">&#9742;</div>
+                        <div class="visit-item-content">
+                            <h4>Phone</h4>
+                            <p><a href="tel:01132841222">0113 284 1222</a></p>
+                        </div>
+                    </div>
+                    <div class="visit-item">
+                        <div class="visit-icon">&#9851;</div>
+                        <div class="visit-item-content">
+                            <h4>Opening Hours</h4>
+                            <table class="hours-table">
+                                <tr><td>Monday</td><td class="closed">Closed</td></tr>
+                                <tr><td>Tuesday</td><td>9:30 AM - 5:00 PM</td></tr>
+                                <tr><td>Wednesday</td><td>9:30 AM - 5:00 PM</td></tr>
+                                <tr><td>Thursday</td><td>9:30 AM - 8:00 PM</td></tr>
+                                <tr><td>Friday</td><td>9:30 AM - 5:00 PM</td></tr>
+                                <tr><td>Saturday</td><td>9:30 AM - 4:00 PM</td></tr>
+                                <tr><td>Sunday</td><td class="closed">Closed</td></tr>
+                            </table>
+                        </div>
+                    </div>
+                    <a href="tel:01132841222" class="cta-btn">Book Appointment</a>
+                </div>
+                <div class="visit-map fade-in fade-in-delay-2">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2357.8!2d-1.6167!3d53.8833!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487959e8c5c0e9a7%3A0x7c3f9b8b8b8b8b8b!2s3%20The%20Parade%2C%20Breary%20Ln%2C%20Bramhope%2C%20Leeds%20LS16%209AF!5e0!3m2!1sen!2suk!4v1699900000000!5m2!1sen!2suk" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>Richard Goodale</h3>
+                    <p>A warm, welcoming village hairdresser in the heart of Bramhope, Leeds. Proudly serving our community with style, care, and a friendly smile.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#team">Team</a></li>
+                        <li><a href="#reviews">Reviews</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><a href="tel:01132841222">0113 284 1222</a></li>
+                        <li><a href="#visit">3 The Parade, Bramhope</a></li>
+                        <li>LS16 9AF</li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Hours</h4>
+                    <ul>
+                        <li>Tue - Wed: 9:30 - 5</li>
+                        <li>Thu: 9:30 - 8</li>
+                        <li>Fri: 9:30 - 5</li>
+                        <li>Sat: 9:30 - 4</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Richard Goodale Hairdresser. All rights reserved.</p>
+                <p>Website by <a href="#">West Yorkshire Web Designs</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 80) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        const mobileToggle = document.getElementById('mobileToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        mobileToggle.addEventListener('click', () => {
+            mobileToggle.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // Close mobile menu on link click
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileToggle.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Fade in on scroll
+        const fadeElements = document.querySelectorAll('.fade-in');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+
+        fadeElements.forEach(el => observer.observe(el));
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                e.preventDefault();
+                const target = document.querySelector(targetId);
+                if (target) {
+                    const offset = 60;
+                    const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset;
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

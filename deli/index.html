@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bramhope Deli | Artisan Coffee & Fine Food - Leeds</title>
+    <meta name="description" content="Bramhope Deli - Artisan coffee, fresh pastries, fine cheeses, sandwiches, and more in the heart of Bramhope, Leeds. Eat in, outdoor seating, or collection.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #1A1410;
+            --bg-light: #231C16;
+            --bg-lighter: #2C2319;
+            --cream: #F5E6D0;
+            --cream-dim: #D4C4B0;
+            --caramel: #C4956A;
+            --gold: #8B6914;
+            --gold-bright: #A67C00;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--cream);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Grain texture overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.035;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            background-repeat: repeat;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--caramel);
+            border-radius: 4px;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 500;
+            line-height: 1.2;
+        }
+
+        /* ===== NAVBAR ===== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 1.2rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.4s ease;
+        }
+
+        .navbar.scrolled {
+            background: rgba(26, 20, 16, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 0.8rem 3rem;
+            box-shadow: 0 2px 30px rgba(0,0,0,0.3);
+        }
+
+        .nav-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: var(--cream);
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+
+        .nav-logo span {
+            color: var(--caramel);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        .nav-links a {
+            color: var(--cream);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 400;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--caramel);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--caramel);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 28px;
+            height: 2px;
+            background: var(--cream);
+            transition: all 0.3s ease;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            min-height: 700px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('images/hero.jpg') center center / cover no-repeat;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                180deg,
+                rgba(26, 20, 16, 0.4) 0%,
+                rgba(26, 20, 16, 0.7) 50%,
+                rgba(26, 20, 16, 0.95) 100%
+            );
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 800px;
+            padding: 0 2rem;
+            animation: heroFadeIn 1.2s ease-out forwards;
+        }
+
+        @keyframes heroFadeIn {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-label {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--caramel);
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.8rem, 7vw, 5.5rem);
+            font-weight: 500;
+            color: var(--cream);
+            margin-bottom: 1rem;
+            letter-spacing: -1px;
+        }
+
+        .hero h1 em {
+            font-style: italic;
+            color: var(--caramel);
+        }
+
+        .hero-tagline {
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            font-weight: 300;
+            color: var(--cream-dim);
+            margin-bottom: 2.5rem;
+            letter-spacing: 0.5px;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-decoration: none;
+            border: 1px solid var(--caramel);
+            cursor: pointer;
+            transition: all 0.4s ease;
+        }
+
+        .btn-primary {
+            background: var(--caramel);
+            color: var(--bg);
+        }
+
+        .btn-primary:hover {
+            background: var(--cream);
+            border-color: var(--cream);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(196, 149, 106, 0.25);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--cream);
+        }
+
+        .btn-outline:hover {
+            background: var(--caramel);
+            color: var(--bg);
+            transform: translateY(-2px);
+        }
+
+        .hero-scroll {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            animation: bounce 2s infinite;
+        }
+
+        .hero-scroll a {
+            color: var(--cream-dim);
+            font-size: 1.5rem;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .hero-scroll a:hover {
+            color: var(--caramel);
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+
+        /* ===== SECTIONS COMMON ===== */
+        .section {
+            padding: 6rem 3rem;
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-label {
+            font-size: 0.75rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--caramel);
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            color: var(--cream);
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            font-size: 1rem;
+            color: var(--cream-dim);
+            max-width: 600px;
+            margin: 0 auto;
+            font-weight: 300;
+        }
+
+        /* ===== FADE IN ANIMATION ===== */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .fade-in-delay-1 { transition-delay: 0.1s; }
+        .fade-in-delay-2 { transition-delay: 0.2s; }
+        .fade-in-delay-3 { transition-delay: 0.3s; }
+        .fade-in-delay-4 { transition-delay: 0.4s; }
+
+        /* ===== ABOUT ===== */
+        .about {
+            background: var(--bg);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .about-card {
+            background: rgba(196, 149, 106, 0.05);
+            border: 1px solid rgba(196, 149, 106, 0.1);
+            border-radius: 16px;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            transition: all 0.4s ease;
+        }
+
+        .about-card:hover {
+            border-color: rgba(196, 149, 106, 0.3);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .about-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .about-card h3 {
+            font-size: 1.4rem;
+            color: var(--cream);
+            margin-bottom: 0.75rem;
+        }
+
+        .about-card p {
+            font-size: 0.9rem;
+            color: var(--cream-dim);
+            font-weight: 300;
+            line-height: 1.7;
+        }
+
+        /* ===== DIVIDER ===== */
+        .divider {
+            width: 60px;
+            height: 1px;
+            background: var(--caramel);
+            margin: 0 auto;
+            opacity: 0.5;
+        }
+
+        /* ===== MENU ===== */
+        .menu {
+            background: var(--bg-light);
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .menu-item {
+            background: rgba(245, 230, 208, 0.03);
+            border: 1px solid rgba(196, 149, 106, 0.08);
+            border-radius: 12px;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            transition: all 0.4s ease;
+            cursor: default;
+        }
+
+        .menu-item:hover {
+            background: rgba(196, 149, 106, 0.08);
+            border-color: rgba(196, 149, 106, 0.25);
+            transform: translateY(-4px);
+        }
+
+        .menu-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .menu-item:hover .menu-icon {
+            transform: scale(1.1);
+        }
+
+        .menu-item h3 {
+            font-size: 1.15rem;
+            color: var(--cream);
+            margin-bottom: 0.5rem;
+        }
+
+        .menu-item p {
+            font-size: 0.8rem;
+            color: var(--cream-dim);
+            font-weight: 300;
+            line-height: 1.6;
+        }
+
+        /* ===== GALLERY ===== */
+        .gallery {
+            background: var(--bg);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(2, 280px);
+            gap: 8px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .gallery-item:nth-child(1) { grid-column: span 2; }
+        .gallery-item:nth-child(4) { grid-column: span 2; }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.08);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 2rem 1rem 1rem;
+            background: linear-gradient(transparent, rgba(26, 20, 16, 0.8));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-overlay h4 {
+            font-size: 1rem;
+            color: var(--cream);
+        }
+
+        .gallery-overlay p {
+            font-size: 0.75rem;
+            color: var(--caramel);
+        }
+
+        /* ===== VISIT US ===== */
+        .visit {
+            background: var(--bg-light);
+        }
+
+        .visit-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            max-width: 1000px;
+            margin: 0 auto;
+            align-items: start;
+        }
+
+        .visit-card {
+            background: rgba(196, 149, 106, 0.05);
+            border: 1px solid rgba(196, 149, 106, 0.1);
+            border-radius: 16px;
+            padding: 2.5rem;
+        }
+
+        .visit-card h3 {
+            font-size: 1.4rem;
+            color: var(--caramel);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .visit-card h3 .icon {
+            font-size: 1.6rem;
+        }
+
+        .hours-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid rgba(196, 149, 106, 0.1);
+            font-size: 0.9rem;
+        }
+
+        .hours-row:last-child {
+            border-bottom: none;
+        }
+
+        .hours-row .day {
+            color: var(--cream);
+        }
+
+        .hours-row .time {
+            color: var(--cream-dim);
+        }
+
+        .hours-row.highlight .day,
+        .hours-row.highlight .time {
+            color: var(--caramel);
+        }
+
+        .info-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 0.75rem 0;
+            font-size: 0.9rem;
+            color: var(--cream-dim);
+        }
+
+        .info-row .label {
+            color: var(--cream);
+            min-width: 70px;
+            font-weight: 500;
+        }
+
+        .info-row a {
+            color: var(--caramel);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .info-row a:hover {
+            color: var(--cream);
+        }
+
+        /* Map placeholder */
+        .map-container {
+            grid-column: 1 / -1;
+            width: 100%;
+            height: 350px;
+            border-radius: 16px;
+            overflow: hidden;
+            margin-top: 1rem;
+            border: 1px solid rgba(196, 149, 106, 0.1);
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            filter: grayscale(30%) brightness(0.7) contrast(1.1);
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: var(--bg);
+            border-top: 1px solid rgba(196, 149, 106, 0.1);
+            padding: 4rem 3rem 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .footer-brand {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            color: var(--cream);
+        }
+
+        .footer-brand span {
+            color: var(--caramel);
+        }
+
+        .footer-info {
+            font-size: 0.8rem;
+            color: var(--cream-dim);
+            text-align: right;
+        }
+
+        .footer-info a {
+            color: var(--caramel);
+            text-decoration: none;
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 2rem auto 0;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(196, 149, 106, 0.08);
+            text-align: center;
+            font-size: 0.75rem;
+            color: var(--cream-dim);
+            opacity: 0.6;
+        }
+
+        .footer-bottom a {
+            color: var(--caramel);
+            text-decoration: none;
+        }
+
+        /* ===== MOBILE RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 1rem 1.5rem;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 70%;
+                max-width: 300px;
+                height: 100vh;
+                background: rgba(26, 20, 16, 0.98);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 2.5rem;
+                transition: right 0.4s ease;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links a {
+                font-size: 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .section {
+                padding: 4rem 1.5rem;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: auto;
+            }
+
+            .gallery-item {
+                height: 200px;
+            }
+
+            .gallery-item:nth-child(1),
+            .gallery-item:nth-child(4) {
+                grid-column: span 1;
+            }
+
+            .visit-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-btns {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 280px;
+                text-align: center;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer-info {
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .menu-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-item {
+                height: 250px;
+            }
+
+            .gallery-item:nth-child(1),
+            .gallery-item:nth-child(4) {
+                grid-column: span 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ===== NAVBAR ===== -->
+    <nav class="navbar" id="navbar">
+        <a href="#" class="nav-logo">Bramhope <span>Deli</span></a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#menu">Menu</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#visit">Visit Us</a></li>
+        </ul>
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero" id="home">
+        <div class="hero-bg"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <span class="hero-label">Bramhope, Leeds</span>
+            <h1>Artisan <em>Coffee</em><br>& Fine Food</h1>
+            <p class="hero-tagline">Freshly brewed coffee, handmade pastries &amp; carefully curated deli favourites. Eat in, take away, or enjoy our outdoor seating.</p>
+            <div class="hero-btns">
+                <a href="#menu" class="btn btn-primary">Explore Our Menu</a>
+                <a href="#visit" class="btn btn-outline">Find Us</a>
+            </div>
+        </div>
+        <div class="hero-scroll">
+            <a href="#about">&#8964;</a>
+        </div>
+    </section>
+
+    <!-- ===== ABOUT ===== -->
+    <section class="section about" id="about">
+        <div class="section-header fade-in">
+            <span class="section-label">Welcome</span>
+            <h2 class="section-title">The Heart of Bramhope</h2>
+            <p class="section-subtitle">A warm, welcoming deli where quality ingredients meet passionate craftsmanship. Every item is thoughtfully sourced and lovingly prepared.</p>
+        </div>
+        <div class="about-grid">
+            <div class="about-card fade-in fade-in-delay-1">
+                <span class="about-icon">&#9749;</span>
+                <h3>Artisan Coffee</h3>
+                <p>Expertly brewed speciality coffee made with carefully selected beans, roasted to perfection and served just the way you like it.</p>
+            </div>
+            <div class="about-card fade-in fade-in-delay-2">
+                <span class="about-icon">&#127838;</span>
+                <h3>Fresh Daily</h3>
+                <p>Our pastries, breads, and cakes are baked fresh every morning. From flaky croissants to indulgent brownies, taste the difference.</p>
+            </div>
+            <div class="about-card fade-in fade-in-delay-3">
+                <span class="about-icon">&#127793;</span>
+                <h3>Local &amp; Seasonal</h3>
+                <p>We proudly source from local suppliers and change our offerings with the seasons to bring you the very best flavours year-round.</p>
+            </div>
+            <div class="about-card fade-in fade-in-delay-4">
+                <span class="about-icon">&#127968;</span>
+                <h3>Eat In or Take Away</h3>
+                <p>Relax in our cosy deli, soak up the sun in our outdoor seating area, or grab your favourites to enjoy at home.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ===== MENU ===== -->
+    <section class="section menu" id="menu">
+        <div class="section-header fade-in">
+            <span class="section-label">Our Offerings</span>
+            <h2 class="section-title">What We Serve</h2>
+            <p class="section-subtitle">From your morning coffee to your evening cheese board, we have something delicious for every moment of the day.</p>
+        </div>
+        <div class="menu-grid">
+            <div class="menu-item fade-in fade-in-delay-1">
+                <span class="menu-icon">&#9749;</span>
+                <h3>Artisan Coffee</h3>
+                <p>Speciality coffees, lattes, cappuccinos &amp; espresso</p>
+            </div>
+            <div class="menu-item fade-in fade-in-delay-2">
+                <span class="menu-icon">&#129360;</span>
+                <h3>Fresh Pastries</h3>
+                <p>Croissants, pain au chocolat, Danish pastries &amp; more</p>
+            </div>
+            <div class="menu-item fade-in fade-in-delay-3">
+                <span class="menu-icon">&#129386;</span>
+                <h3>Sandwiches &amp; Paninis</h3>
+                <p>Handcrafted with artisan bread &amp; premium fillings</p>
+            </div>
+            <div class="menu-item fade-in fade-in-delay-4">
+                <span class="menu-icon">&#129472;</span>
+                <h3>Fine Cheeses</h3>
+                <p>Curated selection with chutneys &amp; accompaniments</p>
+            </div>
+            <div class="menu-item fade-in fade-in-delay-1">
+                <span class="menu-icon">&#127850;</span>
+                <h3>Brownies &amp; Cakes</h3>
+                <p>Homemade chocolate brownies, blondies &amp; daily bakes</p>
+            </div>
+            <div class="menu-item fade-in fade-in-delay-2">
+                <span class="menu-icon">&#127838;</span>
+                <h3>Fresh Bread</h3>
+                <p>Artisan sourdough &amp; specialty loaves baked daily</p>
+            </div>
+            <div class="menu-item fade-in fade-in-delay-3">
+                <span class="menu-icon">&#127807;</span>
+                <h3>Vegan Options</h3>
+                <p>Delicious vegan cakes, salads &amp; plant-based treats</p>
+            </div>
+            <div class="menu-item fade-in fade-in-delay-4">
+                <span class="menu-icon">&#x1F957;</span>
+                <h3>Take Home Meals</h3>
+                <p>Fresh quiches, salads, soups &amp; ready-to-enjoy dishes</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ===== GALLERY ===== -->
+    <section class="section gallery" id="gallery">
+        <div class="section-header fade-in">
+            <span class="section-label">A Taste of Bramhope</span>
+            <h2 class="section-title">Our Gallery</h2>
+            <p class="section-subtitle">Take a peek at what awaits you at Bramhope Deli.</p>
+        </div>
+        <div class="gallery-grid">
+            <div class="gallery-item fade-in fade-in-delay-1">
+                <img src="images/gallery1.jpg" alt="Beautiful latte art">
+                <div class="gallery-overlay">
+                    <h4>Latte Art</h4>
+                    <p>Our signature speciality coffees</p>
+                </div>
+            </div>
+            <div class="gallery-item fade-in fade-in-delay-2">
+                <img src="images/gallery2.jpg" alt="Gourmet sandwiches">
+                <div class="gallery-overlay">
+                    <h4>Gourmet Sandwiches</h4>
+                    <p>Freshly made with artisan bread</p>
+                </div>
+            </div>
+            <div class="gallery-item fade-in fade-in-delay-3">
+                <img src="images/gallery3.jpg" alt="Fresh pastries">
+                <div class="gallery-overlay">
+                    <h4>Fresh Pastries</h4>
+                    <p>Baked every morning</p>
+                </div>
+            </div>
+            <div class="gallery-item fade-in fade-in-delay-4">
+                <img src="images/gallery4.jpg" alt="Deli interior">
+                <div class="gallery-overlay">
+                    <h4>Cosy Interior</h4>
+                    <p>Rustic charm &amp; warm atmosphere</p>
+                </div>
+            </div>
+            <div class="gallery-item fade-in fade-in-delay-1">
+                <img src="images/gallery5.jpg" alt="Cheese board">
+                <div class="gallery-overlay">
+                    <h4>Fine Cheese Selection</h4>
+                    <p>With chutneys &amp; accompaniments</p>
+                </div>
+            </div>
+            <div class="gallery-item fade-in fade-in-delay-2">
+                <img src="images/gallery6.jpg" alt="Brownies and cakes">
+                <div class="gallery-overlay">
+                    <h4>Brownies &amp; Cakes</h4>
+                    <p>Homemade indulgence</p>
+                </div>
+            </div>
+            <div class="gallery-item fade-in fade-in-delay-3">
+                <img src="images/gallery7.jpg" alt="Fresh sourdough bread">
+                <div class="gallery-overlay">
+                    <h4>Artisan Sourdough</h4>
+                    <p>Freshly baked daily</p>
+                </div>
+            </div>
+            <div class="gallery-item fade-in fade-in-delay-4">
+                <img src="images/gallery8.jpg" alt="Deli counter">
+                <div class="gallery-overlay">
+                    <h4>Daily Specials</h4>
+                    <p>Salads, quiches &amp; more</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== VISIT US ===== -->
+    <section class="section visit" id="visit">
+        <div class="section-header fade-in">
+            <span class="section-label">Come See Us</span>
+            <h2 class="section-title">Visit Bramhope Deli</h2>
+            <p class="section-subtitle">We would love to welcome you. Find us in the heart of Bramhope village.</p>
+        </div>
+        <div class="visit-grid">
+            <div class="visit-card fade-in fade-in-delay-1">
+                <h3><span class="icon">&#9200;</span> Opening Hours</h3>
+                <div class="hours-row">
+                    <span class="day">Monday</span>
+                    <span class="time">8:30 AM &ndash; 3:00 PM</span>
+                </div>
+                <div class="hours-row">
+                    <span class="day">Tuesday</span>
+                    <span class="time">8:30 AM &ndash; 3:00 PM</span>
+                </div>
+                <div class="hours-row">
+                    <span class="day">Wednesday</span>
+                    <span class="time">8:30 AM &ndash; 3:00 PM</span>
+                </div>
+                <div class="hours-row">
+                    <span class="day">Thursday</span>
+                    <span class="time">8:30 AM &ndash; 3:00 PM</span>
+                </div>
+                <div class="hours-row">
+                    <span class="day">Friday</span>
+                    <span class="time">8:30 AM &ndash; 3:00 PM</span>
+                </div>
+                <div class="hours-row">
+                    <span class="day">Saturday</span>
+                    <span class="time">8:30 AM &ndash; 3:00 PM</span>
+                </div>
+                <div class="hours-row highlight">
+                    <span class="day">Sunday</span>
+                    <span class="time">10:00 AM &ndash; 3:00 PM</span>
+                </div>
+            </div>
+            <div class="visit-card fade-in fade-in-delay-2">
+                <h3><span class="icon">&#128205;</span> Find Us</h3>
+                <div class="info-row">
+                    <span class="label">Address</span>
+                    <span>4 Tredgold Avenue<br>Bramhope<br>Leeds LS16 9BU</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">Phone</span>
+                    <a href="tel:01132614776">0113 261 4776</a>
+                </div>
+                <div class="info-row">
+                    <span class="label">Owner</span>
+                    <span>Stephanie</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">Parking</span>
+                    <span>Forecourt parking available plus on-road parking nearby</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">Options</span>
+                    <span>Eat in &bull; Outdoor seating &bull; Collection</span>
+                </div>
+            </div>
+            <div class="map-container fade-in">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2355.6!2d-1.6238!3d53.8845!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4879555555555555%3A0x5555555555555555!2s4%20Tredgold%20Ave%2C%20Bramhope%2C%20Leeds%20LS16%209BU!5e0!3m2!1sen!2suk!4v1699900000000!5m2!1sen!2suk"
+                    allowfullscreen=""
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"
+                    title="Bramhope Deli Location">
+                </iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">Bramhope <span>Deli</span></div>
+            <div class="footer-info">
+                4 Tredgold Ave, Bramhope, Leeds LS16 9BU<br>
+                <a href="tel:01132614776">0113 261 4776</a> &nbsp;|&nbsp; 
+                Mon&ndash;Sat 8:30&ndash;3, Sun 10&ndash;3
+            </div>
+        </div>
+        <div class="footer-bottom">
+            Website by <a href="#">West Yorkshire Web Designs</a> &nbsp;&bull;&nbsp; &copy; <script>document.write(new Date().getFullYear())</script> Bramhope Deli
+        </div>
+    </footer>
+
+    <!-- ===== JAVASCRIPT ===== -->
+    <script>
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Hamburger menu
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // Close menu when link clicked
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Intersection Observer for fade-in animations
+        const fadeElements = document.querySelectorAll('.fade-in');
+
+        const fadeObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+
+        fadeElements.forEach(el => {
+            fadeObserver.observe(el);
+        });
+
+        // Smooth scroll for anchor links (fallback)
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
