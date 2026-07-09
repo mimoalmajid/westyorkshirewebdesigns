@@ -352,12 +352,13 @@
     }
     .layer-mid {
       transform-origin: 100px 100px;
-      animation: layer3D 10s linear infinite;
+      animation: layer3D 12s linear infinite;
       will-change: transform;
     }
     .layer-inner {
       transform-origin: 100px 100px;
       animation: layer3D-ccw 10s linear infinite;
+      animation-delay: -5s;
       will-change: transform;
     }
     .layer-dots {
@@ -451,28 +452,28 @@
 
         <!-- Outer diamond: 3s cycle -->
         <g class="layer-outer">
-          <polygon points="100,12 188,100 100,188 12,100" fill="none" stroke="#C4956A" stroke-width="2.5"/>
-          <polygon points="100,12 188,100 100,188 12,100" fill="url(#shade-outer)" opacity="0.6"/>
+          <polygon points="100,15 185,100 100,185 15,100" fill="none" stroke="#C4956A" stroke-width="2.5"/>
+          <polygon points="100,15 185,100 100,185 15,100" fill="url(#shade-outer)" opacity="0.6"/>
         </g>
 
         <!-- Middle diamond: 3.6s cycle, 0.3s delay -->
         <g class="layer-mid">
-          <polygon points="100,40 160,100 100,160 40,100" fill="none" stroke="#F5E6D0" stroke-width="2"/>
-          <polygon points="100,40 160,100 100,160 40,100" fill="url(#shade-mid)" opacity="0.5"/>
+          <polygon points="100,32 160,100 100,168 40,100" fill="none" stroke="#F5E6D0" stroke-width="2"/>
+          <polygon points="100,32 160,100 100,168 40,100" fill="url(#shade-mid)" opacity="0.5"/>
         </g>
 
         <!-- Inner diamond: 4.2s cycle, 0.6s delay -->
         <g class="layer-inner">
-          <polygon points="100,68 132,100 100,132 68,100" fill="none" stroke="#C4956A" stroke-width="2"/>
-          <polygon points="100,68 132,100 100,132 68,100" fill="url(#shade-inner)" opacity="0.4"/>
+          <polygon points="100,52 135,100 100,148 65,100" fill="none" stroke="#C4956A" stroke-width="2"/>
+          <polygon points="100,52 135,100 100,148 65,100" fill="url(#shade-inner)" opacity="0.4"/>
         </g>
 
         <!-- Corner dots: orbiting around the diamond -->
         <g class="layer-dots">
-          <circle cx="30" cy="30" r="5" fill="#C4956A"/>
-          <circle cx="170" cy="30" r="5" fill="#C4956A"/>
-          <circle cx="30" cy="170" r="5" fill="#C4956A"/>
-          <circle cx="170" cy="170" r="5" fill="#C4956A"/>
+          <circle cx="18" cy="18" r="5" fill="#C4956A"/>
+          <circle cx="182" cy="18" r="5" fill="#C4956A"/>
+          <circle cx="18" cy="182" r="5" fill="#C4956A"/>
+          <circle cx="182" cy="182" r="5" fill="#C4956A"/>
         </g>
       </svg>
     </div>
